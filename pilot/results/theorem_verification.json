@@ -1,0 +1,498 @@
+{
+  "theorem1_phase_transition": {
+    "parameters": {
+      "p0": 0.78,
+      "p_inf": 0.08,
+      "lambda": 0.55,
+      "mu_rate": 0.45
+    },
+    "analytical_population_mean_error_p_bar": 0.395,
+    "analytical_critical_quorum_ratio_phi_crit": 0.69731,
+    "analytical_cov_latency_accuracy": 0.385,
+    "n_sweep": [
+      {
+        "N": 7,
+        "sync_full_majority_error": 0.28395,
+        "quorum_curve": [
+          {
+            "k": 3,
+            "phi_eff": 0.4286,
+            "analytical_elem_error": 0.60306,
+            "mc_elem_error": 0.57859,
+            "abs_formula_diff": 0.02447,
+            "mc_majority_false_consensus_rate": 0.61428,
+            "mean_quorum_latency_s": 1.1307,
+            "p95_quorum_latency_s": 2.3775
+          },
+          {
+            "k": 3,
+            "phi_eff": 0.4286,
+            "analytical_elem_error": 0.60306,
+            "mc_elem_error": 0.57859,
+            "abs_formula_diff": 0.02447,
+            "mc_majority_false_consensus_rate": 0.61428,
+            "mean_quorum_latency_s": 1.1307,
+            "p95_quorum_latency_s": 2.3775
+          },
+          {
+            "k": 3,
+            "phi_eff": 0.4286,
+            "analytical_elem_error": 0.60306,
+            "mc_elem_error": 0.57859,
+            "abs_formula_diff": 0.02447,
+            "mc_majority_false_consensus_rate": 0.61428,
+            "mean_quorum_latency_s": 1.1307,
+            "p95_quorum_latency_s": 2.3775
+          },
+          {
+            "k": 5,
+            "phi_eff": 0.7143,
+            "analytical_elem_error": 0.49375,
+            "mc_elem_error": 0.48359,
+            "abs_formula_diff": 0.01015,
+            "mc_majority_false_consensus_rate": 0.46992,
+            "mean_quorum_latency_s": 2.4211,
+            "p95_quorum_latency_s": 4.5412
+          },
+          {
+            "k": 5,
+            "phi_eff": 0.7143,
+            "analytical_elem_error": 0.49375,
+            "mc_elem_error": 0.48359,
+            "abs_formula_diff": 0.01015,
+            "mc_majority_false_consensus_rate": 0.46992,
+            "mean_quorum_latency_s": 2.4211,
+            "p95_quorum_latency_s": 4.5412
+          },
+          {
+            "k": 5,
+            "phi_eff": 0.7143,
+            "analytical_elem_error": 0.49375,
+            "mc_elem_error": 0.48359,
+            "abs_formula_diff": 0.01015,
+            "mc_majority_false_consensus_rate": 0.46992,
+            "mean_quorum_latency_s": 2.4211,
+            "p95_quorum_latency_s": 4.5412
+          },
+          {
+            "k": 7,
+            "phi_eff": 1.0,
+            "analytical_elem_error": 0.395,
+            "mc_elem_error": 0.3966,
+            "abs_formula_diff": 0.0016,
+            "mc_majority_false_consensus_rate": 0.28395,
+            "mean_quorum_latency_s": 5.7684,
+            "p95_quorum_latency_s": 10.9435
+          },
+          {
+            "k": 7,
+            "phi_eff": 1.0,
+            "analytical_elem_error": 0.395,
+            "mc_elem_error": 0.3966,
+            "abs_formula_diff": 0.0016,
+            "mc_majority_false_consensus_rate": 0.28395,
+            "mean_quorum_latency_s": 5.7684,
+            "p95_quorum_latency_s": 10.9435
+          }
+        ]
+      },
+      {
+        "N": 15,
+        "sync_full_majority_error": 0.2015,
+        "quorum_curve": [
+          {
+            "k": 5,
+            "phi_eff": 0.3333,
+            "analytical_elem_error": 0.64119,
+            "mc_elem_error": 0.62596,
+            "abs_formula_diff": 0.01523,
+            "mc_majority_false_consensus_rate": 0.7237,
+            "mean_quorum_latency_s": 0.8642,
+            "p95_quorum_latency_s": 1.5892
+          },
+          {
+            "k": 5,
+            "phi_eff": 0.3333,
+            "analytical_elem_error": 0.64119,
+            "mc_elem_error": 0.62596,
+            "abs_formula_diff": 0.01523,
+            "mc_majority_false_consensus_rate": 0.7237,
+            "mean_quorum_latency_s": 0.8642,
+            "p95_quorum_latency_s": 1.5892
+          },
+          {
+            "k": 7,
+            "phi_eff": 0.4667,
+            "analytical_elem_error": 0.58803,
+            "mc_elem_error": 0.5756,
+            "abs_formula_diff": 0.01243,
+            "mc_majority_false_consensus_rate": 0.65817,
+            "mean_quorum_latency_s": 1.3376,
+            "p95_quorum_latency_s": 2.2831
+          },
+          {
+            "k": 9,
+            "phi_eff": 0.6,
+            "analytical_elem_error": 0.53648,
+            "mc_elem_error": 0.52769,
+            "abs_formula_diff": 0.00878,
+            "mc_majority_false_consensus_rate": 0.56775,
+            "mean_quorum_latency_s": 1.929,
+            "p95_quorum_latency_s": 3.1401
+          },
+          {
+            "k": 11,
+            "phi_eff": 0.7333,
+            "analytical_elem_error": 0.48677,
+            "mc_elem_error": 0.48141,
+            "abs_formula_diff": 0.00537,
+            "mc_majority_false_consensus_rate": 0.45198,
+            "mean_quorum_latency_s": 2.7431,
+            "p95_quorum_latency_s": 4.3359
+          },
+          {
+            "k": 11,
+            "phi_eff": 0.7333,
+            "analytical_elem_error": 0.48677,
+            "mc_elem_error": 0.48141,
+            "abs_formula_diff": 0.00537,
+            "mc_majority_false_consensus_rate": 0.45198,
+            "mean_quorum_latency_s": 2.7431,
+            "p95_quorum_latency_s": 4.3359
+          },
+          {
+            "k": 13,
+            "phi_eff": 0.8667,
+            "analytical_elem_error": 0.43933,
+            "mc_elem_error": 0.43694,
+            "abs_formula_diff": 0.00239,
+            "mc_majority_false_consensus_rate": 0.32312,
+            "mean_quorum_latency_s": 4.039,
+            "p95_quorum_latency_s": 6.3733
+          },
+          {
+            "k": 15,
+            "phi_eff": 1.0,
+            "analytical_elem_error": 0.395,
+            "mc_elem_error": 0.39488,
+            "abs_formula_diff": 0.00012,
+            "mc_majority_false_consensus_rate": 0.2015,
+            "mean_quorum_latency_s": 7.3748,
+            "p95_quorum_latency_s": 12.6157
+          }
+        ]
+      },
+      {
+        "N": 31,
+        "sync_full_majority_error": 0.11607,
+        "quorum_curve": [
+          {
+            "k": 9,
+            "phi_eff": 0.2903,
+            "analytical_elem_error": 0.65865,
+            "mc_elem_error": 0.64984,
+            "abs_formula_diff": 0.00881,
+            "mc_majority_false_consensus_rate": 0.82542,
+            "mean_quorum_latency_s": 0.7483,
+            "p95_quorum_latency_s": 1.203
+          },
+          {
+            "k": 11,
+            "phi_eff": 0.3548,
+            "analytical_elem_error": 0.63251,
+            "mc_elem_error": 0.62458,
+            "abs_formula_diff": 0.00793,
+            "mc_majority_false_consensus_rate": 0.80075,
+            "mean_quorum_latency_s": 0.9549,
+            "p95_quorum_latency_s": 1.4753
+          },
+          {
+            "k": 15,
+            "phi_eff": 0.4839,
+            "analytical_elem_error": 0.58128,
+            "mc_elem_error": 0.57458,
+            "abs_formula_diff": 0.00671,
+            "mc_majority_false_consensus_rate": 0.7175,
+            "mean_quorum_latency_s": 1.4394,
+            "p95_quorum_latency_s": 2.1136
+          },
+          {
+            "k": 17,
+            "phi_eff": 0.5484,
+            "analytical_elem_error": 0.55623,
+            "mc_elem_error": 0.55044,
+            "abs_formula_diff": 0.00578,
+            "mc_majority_false_consensus_rate": 0.6566,
+            "mean_quorum_latency_s": 1.7259,
+            "p95_quorum_latency_s": 2.4863
+          },
+          {
+            "k": 21,
+            "phi_eff": 0.6774,
+            "analytical_elem_error": 0.50737,
+            "mc_elem_error": 0.50313,
+            "abs_formula_diff": 0.00424,
+            "mc_majority_false_consensus_rate": 0.51085,
+            "mean_quorum_latency_s": 2.4459,
+            "p95_quorum_latency_s": 3.4361
+          },
+          {
+            "k": 23,
+            "phi_eff": 0.7419,
+            "analytical_elem_error": 0.48364,
+            "mc_elem_error": 0.4802,
+            "abs_formula_diff": 0.00344,
+            "mc_majority_false_consensus_rate": 0.42535,
+            "mean_quorum_latency_s": 2.916,
+            "p95_quorum_latency_s": 4.0732
+          },
+          {
+            "k": 27,
+            "phi_eff": 0.871,
+            "analytical_elem_error": 0.43785,
+            "mc_elem_error": 0.43592,
+            "abs_formula_diff": 0.00193,
+            "mc_majority_false_consensus_rate": 0.25205,
+            "mean_quorum_latency_s": 4.3193,
+            "p95_quorum_latency_s": 6.0464
+          },
+          {
+            "k": 31,
+            "phi_eff": 1.0,
+            "analytical_elem_error": 0.395,
+            "mc_elem_error": 0.39445,
+            "abs_formula_diff": 0.00055,
+            "mc_majority_false_consensus_rate": 0.11607,
+            "mean_quorum_latency_s": 8.9323,
+            "p95_quorum_latency_s": 14.2274
+          }
+        ]
+      },
+      {
+        "N": 63,
+        "sync_full_majority_error": 0.04537,
+        "quorum_curve": [
+          {
+            "k": 17,
+            "phi_eff": 0.2698,
+            "analytical_elem_error": 0.66701,
+            "mc_elem_error": 0.66234,
+            "abs_formula_diff": 0.00467,
+            "mc_majority_false_consensus_rate": 0.91615,
+            "mean_quorum_latency_s": 0.6917,
+            "p95_quorum_latency_s": 0.9889
+          },
+          {
+            "k": 23,
+            "phi_eff": 0.3651,
+            "analytical_elem_error": 0.6284,
+            "mc_elem_error": 0.62487,
+            "abs_formula_diff": 0.00353,
+            "mc_majority_false_consensus_rate": 0.88302,
+            "mean_quorum_latency_s": 0.9989,
+            "p95_quorum_latency_s": 1.3671
+          },
+          {
+            "k": 29,
+            "phi_eff": 0.4603,
+            "analytical_elem_error": 0.59053,
+            "mc_elem_error": 0.58742,
+            "abs_formula_diff": 0.00311,
+            "mc_majority_false_consensus_rate": 0.82437,
+            "mean_quorum_latency_s": 1.3554,
+            "p95_quorum_latency_s": 1.8028
+          },
+          {
+            "k": 35,
+            "phi_eff": 0.5556,
+            "analytical_elem_error": 0.55347,
+            "mc_elem_error": 0.55101,
+            "abs_formula_diff": 0.00246,
+            "mc_majority_false_consensus_rate": 0.7205,
+            "mean_quorum_latency_s": 1.7786,
+            "p95_quorum_latency_s": 2.3147
+          },
+          {
+            "k": 41,
+            "phi_eff": 0.6508,
+            "analytical_elem_error": 0.51731,
+            "mc_elem_error": 0.51575,
+            "abs_formula_diff": 0.00156,
+            "mc_majority_false_consensus_rate": 0.57637,
+            "mean_quorum_latency_s": 2.305,
+            "p95_quorum_latency_s": 2.9616
+          },
+          {
+            "k": 47,
+            "phi_eff": 0.746,
+            "analytical_elem_error": 0.48215,
+            "mc_elem_error": 0.48118,
+            "abs_formula_diff": 0.00097,
+            "mc_majority_false_consensus_rate": 0.40163,
+            "mean_quorum_latency_s": 2.9925,
+            "p95_quorum_latency_s": 3.8045
+          },
+          {
+            "k": 55,
+            "phi_eff": 0.873,
+            "analytical_elem_error": 0.43714,
+            "mc_elem_error": 0.43694,
+            "abs_formula_diff": 0.0002,
+            "mc_majority_false_consensus_rate": 0.1785,
+            "mean_quorum_latency_s": 4.4678,
+            "p95_quorum_latency_s": 5.7056
+          },
+          {
+            "k": 63,
+            "phi_eff": 1.0,
+            "analytical_elem_error": 0.395,
+            "mc_elem_error": 0.39525,
+            "abs_formula_diff": 0.00025,
+            "mc_majority_false_consensus_rate": 0.04537,
+            "mean_quorum_latency_s": 10.5123,
+            "p95_quorum_latency_s": 15.85
+          }
+        ]
+      }
+    ]
+  },
+  "theorem2_cascade_amplification": {
+    "fast_k_of_n": {
+      "per_stage_error": 0.56,
+      "beta_herd": 0.72,
+      "amplification_factor_rho": 0.3168,
+      "asymptotic_error_floor": 0.81967,
+      "stages": [
+        {
+          "stage": 1,
+          "analytical_cascade_error": 0.56,
+          "mc_cascade_error": 0.55745,
+          "abs_diff": 0.00255,
+          "end_to_end_accuracy": 0.44255
+        },
+        {
+          "stage": 2,
+          "analytical_cascade_error": 0.73741,
+          "mc_cascade_error": 0.7367,
+          "abs_diff": 0.00071,
+          "end_to_end_accuracy": 0.2633
+        },
+        {
+          "stage": 3,
+          "analytical_cascade_error": 0.79361,
+          "mc_cascade_error": 0.79297,
+          "abs_diff": 0.00064,
+          "end_to_end_accuracy": 0.20703
+        },
+        {
+          "stage": 4,
+          "analytical_cascade_error": 0.81142,
+          "mc_cascade_error": 0.80805,
+          "abs_diff": 0.00337,
+          "end_to_end_accuracy": 0.19195
+        },
+        {
+          "stage": 5,
+          "analytical_cascade_error": 0.81706,
+          "mc_cascade_error": 0.8154,
+          "abs_diff": 0.00166,
+          "end_to_end_accuracy": 0.1846
+        },
+        {
+          "stage": 6,
+          "analytical_cascade_error": 0.81884,
+          "mc_cascade_error": 0.8185,
+          "abs_diff": 0.00034,
+          "end_to_end_accuracy": 0.1815
+        }
+      ]
+    },
+    "quorumguard": {
+      "per_stage_error": 0.055,
+      "beta_herd": 0.72,
+      "amplification_factor_rho": 0.6804,
+      "asymptotic_error_floor": 0.17209,
+      "stages": [
+        {
+          "stage": 1,
+          "analytical_cascade_error": 0.055,
+          "mc_cascade_error": 0.05362,
+          "abs_diff": 0.00138,
+          "end_to_end_accuracy": 0.94637
+        },
+        {
+          "stage": 2,
+          "analytical_cascade_error": 0.09242,
+          "mc_cascade_error": 0.0931,
+          "abs_diff": 0.00068,
+          "end_to_end_accuracy": 0.9069
+        },
+        {
+          "stage": 3,
+          "analytical_cascade_error": 0.11788,
+          "mc_cascade_error": 0.11845,
+          "abs_diff": 0.00057,
+          "end_to_end_accuracy": 0.88155
+        },
+        {
+          "stage": 4,
+          "analytical_cascade_error": 0.13521,
+          "mc_cascade_error": 0.1329,
+          "abs_diff": 0.00231,
+          "end_to_end_accuracy": 0.8671
+        },
+        {
+          "stage": 5,
+          "analytical_cascade_error": 0.147,
+          "mc_cascade_error": 0.14583,
+          "abs_diff": 0.00117,
+          "end_to_end_accuracy": 0.85418
+        },
+        {
+          "stage": 6,
+          "analytical_cascade_error": 0.15502,
+          "mc_cascade_error": 0.1529,
+          "abs_diff": 0.00212,
+          "end_to_end_accuracy": 0.8471
+        }
+      ]
+    }
+  },
+  "theorem3_cvar_optimality": {
+    "Fast_3_of_7": {
+      "accuracy": 0.5046,
+      "false_consensus_risk": 0.4954,
+      "mean_latency_s": 0.9884,
+      "p95_latency_s": 1.2609,
+      "cvar95_latency_s": 1.2913
+    },
+    "Sync_7_of_7": {
+      "accuracy": 0.7105,
+      "false_consensus_risk": 0.2895,
+      "mean_latency_s": 7.4325,
+      "p95_latency_s": 15.4217,
+      "cvar95_latency_s": 19.6052
+    },
+    "Genealogy_Sync_HPR": {
+      "accuracy": 0.9279,
+      "false_consensus_risk": 0.0721,
+      "mean_latency_s": 7.4325,
+      "p95_latency_s": 15.4217,
+      "cvar95_latency_s": 19.6052
+    },
+    "CVaR_Static_Cutoff": {
+      "accuracy": 0.471,
+      "false_consensus_risk": 0.529,
+      "mean_latency_s": 3.2,
+      "p95_latency_s": 3.2,
+      "cvar95_latency_s": 3.2
+    },
+    "QuorumGuard": {
+      "accuracy": 0.9278,
+      "false_consensus_risk": 0.0722,
+      "mean_latency_s": 2.5594,
+      "p95_latency_s": 4.6872,
+      "cvar95_latency_s": 5.6931
+    }
+  }
+}

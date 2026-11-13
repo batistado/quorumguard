@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use QuorumGuard in your research, please cite the paper and software below."
+title: "QuorumGuard: Straggler-Induced Herding Bounds and Claim-Genealogy-Gated Hedged Quorums in Asynchronous Multi-Agent LLM Consensus"
+version: 0.1.0
+date-released: 2026-11-13
+authors:
+  - family-names: "Syed"
+    given-names: "Mohammed Kamran"
+    affiliation: "Google"
+repository-code: "https://github.com/batistado/quorumguard"
+keywords:
+  - asynchronous multi-agent consensus
+  - straggler selection bias
+  - claim genealogy
+  - epistemic herding
+  - tail latency scheduling
