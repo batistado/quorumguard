@@ -1,0 +1,42 @@
+{
+  "1_Fast_k_of_N": {
+    "stage1_accuracy": 0.4333,
+    "boundary_trap_stage1_accuracy": 0.0556,
+    "mean_stage1_latency_s": 0.5618,
+    "p95_stage1_latency_s": 0.7605,
+    "cvar95_stage1_latency_s": 0.7696,
+    "boost_rate": 0.0
+  },
+  "2_Entropy_Gate_Only": {
+    "stage1_accuracy": 0.7667,
+    "boundary_trap_stage1_accuracy": 0.6667,
+    "mean_stage1_latency_s": 9.3039,
+    "p95_stage1_latency_s": 17.2423,
+    "cvar95_stage1_latency_s": 19.0381,
+    "boost_rate": 0.0
+  },
+  "3_Genealogy_Only": {
+    "stage1_accuracy": 0.6,
+    "boundary_trap_stage1_accuracy": 0.3889,
+    "mean_stage1_latency_s": 7.0803,
+    "p95_stage1_latency_s": 17.3351,
+    "cvar95_stage1_latency_s": 19.1225,
+    "boost_rate": 0.0
+  },
+  "4_QuorumGuard_No_Boost": {
+    "stage1_accuracy": 0.8,
+    "boundary_trap_stage1_accuracy": 0.7222,
+    "mean_stage1_latency_s": 9.3106,
+    "p95_stage1_latency_s": 16.2,
+    "cvar95_stage1_latency_s": 18.1987,
+    "boost_rate": 0.0
+  },
+  "5_QuorumGuard_Full": {
+    "stage1_accuracy": 0.8,
+    "boundary_trap_stage1_accuracy": 0.7222,
+    "mean_stage1_latency_s": 3.7044,
+    "p95_stage1_latency_s": 5.9284,
+    "cvar95_stage1_latency_s": 6.3488,
+    "boost_rate": 1.0
+  }
+}
