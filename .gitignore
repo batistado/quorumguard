@@ -1,0 +1,40 @@
+# Python & Virtual Environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
+
+# OS & Editor
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
+
+# Model Weights, Raw Traces & Large Scratch Artifacts
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+*.npz
+hf_cache/
+raw_traces/
+
+# LaTeX Build Intermediates (keep .tex, .bib, .pdf)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
