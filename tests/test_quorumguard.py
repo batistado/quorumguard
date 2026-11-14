@@ -127,3 +127,47 @@ def test_posterior_entropy_and_margin_from_logits() -> None:
         EpistemicSignals(option_entropy_nats=0.9, logit_margin=0.4, tool_verified=False)
     )
     assert w_verified > 2.0 * w_shallow
+
+
+def test_shared_root_clone_scaling_invariance() -> None:
+    """Verify Proposition 1: M clones sharing one root never exceed single-root capacity."""
+    dag = ProvenanceDAG()
+    dag.add_node("shared_root", kind="source")
+    votes_3 = []
+    for i in range(12):
+        aid = f"clone_{i}"
+        dag.register_agent_lineage(aid, ["shared_root"])
+        votes_3.append((aid, "A", 0.76))
+    w3, r3 = dag.compute_effective_support(votes_3[:3])
+    w12, r12 = dag.compute_effective_support(votes_3)
+    assert r3["A"] == 1 and r12["A"] == 1
+    assert math.isclose(w3["A"], 0.76, rel_tol=1e-6)
+    assert math.isclose(w12["A"], 0.76, rel_tol=1e-6)
+
+
+def test_line13_fallback_and_budget_exhaustion() -> None:
+    """Verify Line 13 fallback waits for T_(N) when early gates fail, and PriorityBudgetPool caps boosts."""
+    dag = ProvenanceDAG()
+    for i in range(6):
+        dag.register_agent_lineage(f"agent_{i}", [f"root_{i}"])
+
+    pool = PriorityBudgetPool(max_budget_tokens=1.0, refill_per_stage=0.5)
+    assert pool.try_acquire(2) == 1
+    assert pool.try_acquire(1) == 0  # exhausted until stage completion refill
+    pool.on_stage_complete()
+    assert math.isclose(pool.available, 0.5, rel_tol=1e-6)
+
+    ctrl = QuorumGuardController(dag, budget_pool=PriorityBudgetPool(max_budget_tokens=0.0, refill_per_stage=0.0))
+    votes = [
+        AgentVote("agent_0", "A", 0.5, EpistemicSignals(option_entropy_nats=0.95, logit_margin=0.4)),
+        AgentVote("agent_1", "B", 0.7, EpistemicSignals(option_entropy_nats=0.95, logit_margin=0.4)),
+        AgentVote("agent_2", "C", 0.9, EpistemicSignals(option_entropy_nats=0.95, logit_margin=0.4)),
+        AgentVote("agent_3", "D", 1.2, EpistemicSignals(option_entropy_nats=0.95, logit_margin=0.4)),
+        AgentVote("agent_4", "C", 3.5, EpistemicSignals(option_entropy_nats=0.45, logit_margin=1.2, has_cot_trace=True)),
+        AgentVote("agent_5", "C", 6.0, EpistemicSignals(option_entropy_nats=0.40, logit_margin=1.3, tool_verified=True), is_deep_verifier=True),
+    ]
+    res = ctrl.evaluate_asynchronous_pool(votes)
+    assert res.boosted_agent_ids == ()
+    assert res.early_closed is False
+    assert math.isclose(res.commit_time_s, 6.0, rel_tol=1e-5)
+    assert res.committed_claim == "C"

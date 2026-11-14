@@ -26,9 +26,11 @@ VLLM_PRIORITY_BACKGROUND_SPECULATIVE: int = 5
 @dataclass(frozen=True)
 class QuorumGuardConfig:
     min_independent_roots: int = 3
-    tau_effective_quorum: float = 2.22
-    min_lead_margin: float = 0.95
-    max_fast_normalized_entropy: float = 0.22
+    tau_effective_quorum: float = 2.12
+    min_lead_margin: float = 0.72
+    max_fast_normalized_entropy: float = 0.08
+    min_fast_logit_margin: float = 3.2
+    dissent_runner_threshold: float = 0.35
     dissent_trigger_min_arrivals: int = 3
     priority_boost_speedup: float = 3.2
     max_boost_slots_per_stage: int = 2
@@ -62,7 +64,7 @@ class PriorityBudgetPool:
     so priority elevation cannot cause priority-inversion storms under heavy load.
     """
 
-    def __init__(self, max_budget_tokens: float = 10.0, refill_per_stage: float = 1.2) -> None:
+    def __init__(self, max_budget_tokens: float = 6.0, refill_per_stage: float = 0.64) -> None:
         self.max_budget = max_budget_tokens
         self.refill_per_stage = refill_per_stage
         self.available = max_budget_tokens
@@ -126,7 +128,10 @@ class QuorumGuardController:
                 (
                     aid,
                     vote_map[aid].claim,
-                    compute_epistemic_weight(vote_map[aid].signals),
+                    compute_epistemic_weight(
+                        vote_map[aid].signals,
+                        is_deep_verifier=vote_map[aid].is_deep_verifier,
+                    ),
                 )
                 for aid in observed_ids
             ]
@@ -138,19 +143,29 @@ class QuorumGuardController:
 
             supporters = [vote_map[aid] for aid in observed_ids if vote_map[aid].claim == lead_claim]
             mean_ent = sum(s.signals.normalized_option_entropy for s in supporters) / max(1, len(supporters))
-            has_deep_cert = any(s.signals.tool_verified or s.is_deep_verifier for s in supporters)
+            min_margin = min(s.signals.logit_margin for s in supporters)
+            dissent = len(ranked) >= 2 and runner_w >= cfg.dissent_runner_threshold
+            deep_supporter_roots: Set[str] = set()
+            for aid in observed_ids:
+                v = vote_map[aid]
+                if v.claim == lead_claim and (
+                    v.signals.tool_verified or v.is_deep_verifier or v.signals.has_cot_trace
+                ):
+                    deep_supporter_roots.update(self.dag.resolve_roots(aid))
+            r_deep = len(deep_supporter_roots)
 
             clean_fast_pass = (
-                lead_r >= min_roots
+                (not dissent)
+                and lead_r >= min_roots
                 and lead_w >= eff_tau
-                and (lead_w - runner_w) >= cfg.min_lead_margin
                 and mean_ent <= cfg.max_fast_normalized_entropy
+                and min_margin >= cfg.min_fast_logit_margin
             )
             verified_pass = (
-                has_deep_cert
+                (r_deep >= 2 or (r_deep >= 1 and not dissent))
                 and lead_r >= 2
-                and lead_w >= (eff_tau - 0.18)
-                and (lead_w - runner_w) >= 0.65
+                and lead_w >= (eff_tau - 0.15)
+                and (lead_w - runner_w) >= cfg.min_lead_margin
             )
 
             if clean_fast_pass or verified_pass:
@@ -180,13 +195,9 @@ class QuorumGuardController:
                     comp_t = t_now + (dyn_arrival[aid_boost] - t_now) / max(1.0, cfg.priority_boost_speedup)
                     dyn_arrival[aid_boost] = max(floor_t, comp_t)
         else:
-            weighted_tuples = [
-                (aid, vote_map[aid].claim, compute_epistemic_weight(vote_map[aid].signals))
-                for aid in observed_ids
-            ]
-            claim_weights, claim_roots = self.dag.compute_effective_support(weighted_tuples)
-            commit_claim, commit_weight = max(claim_weights.items(), key=lambda kv: kv[1])
-            commit_roots = claim_roots[commit_claim]
+            commit_claim = lead_claim
+            commit_weight = lead_w
+            commit_roots = lead_r
             commit_time = max(dyn_arrival.values())
 
         if self.budget_pool is not None:

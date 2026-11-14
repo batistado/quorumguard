@@ -156,6 +156,10 @@ def build_dataset_staging(stage_dir: Path, username: str) -> Dict[str, Any]:
     fig_dir.mkdir(parents=True, exist_ok=True)
     for png in (REPO_ROOT / "paper" / "figures").glob("*.png"):
         shutil.copy2(png, fig_dir / png.name)
+    paper_dst = stage_dir / "paper"
+    paper_dst.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(REPO_ROOT / "paper" / "main.pdf", paper_dst / "main.pdf")
+    shutil.copy2(REPO_ROOT / "paper" / "highlights.pdf", paper_dst / "highlights.pdf")
 
     dataset_card = f"""---
 license: apache-2.0
@@ -178,6 +182,8 @@ models:
   - Qwen/Qwen2.5-3B-Instruct
   - Qwen/Qwen2.5-7B-Instruct
   - Qwen/Qwen2.5-Coder-14B-Instruct
+  - HuggingFaceTB/SmolLM2-1.7B-Instruct
+  - ibm-granite/granite-3.1-8b-instruct
 configs:
   - config_name: policy_decisions
     default: true
@@ -200,28 +206,32 @@ configs:
 
 # QuorumBench v1.0
 
-Benchmark tasks and live Apple M5 Pro (`MPS` FP16) telemetry for **[QuorumGuard](https://github.com/batistado/quorumguard)**: asynchronous multi-agent consensus across `Qwen/Qwen2.5-3B-Instruct`, `Qwen/Qwen2.5-7B-Instruct`, and `Qwen/Qwen2.5-Coder-14B-Instruct` with isolated Python sandbox verification.
+Benchmark tasks and Apple M5 Pro (`48 GB` unified memory, `MPS` FP16) telemetry for **[QuorumGuard](https://github.com/batistado/quorumguard)**: asynchronous multi-agent consensus across `Qwen/Qwen2.5-3B-Instruct`, `Qwen/Qwen2.5-7B-Instruct`, `Qwen/Qwen2.5-Coder-14B-Instruct`, `HuggingFaceTB/SmolLM2-1.7B-Instruct`, and `ibm-granite/granite-3.1-8b-instruct` with isolated Python sandbox verification on both `QuorumBench` and `CRUXEval-50`.
 
 * **Interactive Explorer:** [`{username}/QuorumGuard-Explorer`](https://huggingface.co/spaces/{username}/QuorumGuard-Explorer)
 * **Scheduler & Controller Package:** [`{username}/QuorumGuard`](https://huggingface.co/{username}/QuorumGuard)
+* **Compiled Paper PDF (10 pages):** [`paper/main.pdf`](paper/main.pdf)
 * **GitHub Repository:** [`github.com/batistado/quorumguard`](https://github.com/batistado/quorumguard)
 
 ## Dataset Configurations
 
-1. `policy_decisions` (`400` rows): Stage-1, Stage-2, and end-to-end latency/accuracy outcomes across 5 consensus policies (`Fast_k_of_N`, `CVaR_Static_Cutoff`, `Sync_N_of_N`, `Genealogy_Sync_HPR`, `QuorumGuard`) on both the 50-task 3-tier suite and 30-task 2-tier pilot.
-2. `tasks` (`50` rows): Two-stage systems, numerical precision, SQL, and algorithmic verification workflows (`20` routine tasks and `30` boundary traps) with shared upstream triage notes.
+1. `policy_decisions` (`400` rows): Stage-1, Stage-2, and end-to-end latency/accuracy outcomes across 5 core consensus policies (`Fast_k_of_N`, `CVaR_Static_Cutoff`, `Sync_N_of_N`, `Genealogy_Sync_HPR`, `QuorumGuard`) on both the 50-task 3-tier suite and 30-task 2-tier pilot (`raw/revision_ablations_and_sweeps.json` adds `Fast_3_of_N_Maj`, `TW-Fast`, `Entropy-Cascade`, 7-point CVaR sweep, 10-seed variances, 2,000-bootstrap 95% CIs, hardware-only latencies, and 4-axis/`psi_i` sensitivity).
+2. `tasks` (`50` rows): Two-stage systems, numerical precision, SQL, and algorithmic verification workflows (`20` routine tasks and `30` boundary traps) with shared upstream triage notes (`raw/cruxeval50_crossfamily.json` adds external `CRUXEval-50` & `SmolLM2-1.7B + Granite-3.1-8B` runs).
 3. `agent_observations` (`560` rows): Per-agent MPS wall-clock times, completion timestamps, pre-commitment 4-option Shannon entropies, top-2 logit margins, provenance roots, and Python sandbox execution receipts.
-4. `gpu_contention` (`12` rows): Measured 8-token KV-cached decode quantum contention on `Qwen2.5-7B-Instruct` across server loads `rho in {{0.58, 0.72, 0.85, 0.93}}`.
+4. `gpu_contention` (`12` rows): Trace-driven 8-token KV-cached decode quantum contention on `Qwen2.5-7B-Instruct` across loads `rho in {{0.58, 0.72, 0.85, 0.93}}` (`raw/live_mps_quantum_server.json` adds the live 64-request concurrent multi-`DynamicCache` MPS server benchmark).
 
 ## Summary Results (50 Two-Stage Workflows, 3B + 7B + 14B-Coder)
 
-| Policy | Stage-1 Acc | Stage-2 Acc | Joint 2-Stage Acc | Trap Joint Acc | Mean Latency | P95 Latency |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `Fast_k_of_N` | 46.0% | 56.0% | 28.0% | 6.7% | 1.11s | 1.46s |
-| `CVaR_Static_Cutoff` | 46.0% | 52.0% | 28.0% | 6.7% | 5.60s | 5.60s |
-| `Sync_N_of_N` | 66.0% | 68.0% | 42.0% | 23.3% | 36.34s | 49.86s |
-| `Genealogy_Sync_HPR` | 84.0% | 88.0% | 72.0% | 63.3% | 35.97s | 48.86s |
-| **`QuorumGuard`** | **84.0%** | **88.0%** | **72.0%** | **63.3%** | **10.10s** | **14.82s** |
+| Policy | S1 / S2 Acc | Joint [95% CI] | 10-Seed (Trap) | Mean / P95 [95% CI] | HW-Only P95 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| `Fast_k_of_N (k=3)` | 46.0% / 52.0% | 28.0% [16, 42] | 27.8+-0.6% (6.7%) | 1.18s / 1.49s [1.4, 1.6] | 0.32s |
+| `Fast_3_of_N_Maj` | 46.0% / 52.0% | 28.0% [16, 42] | 28.0+-0.9% (6.7%) | 1.34s / 1.58s [1.5, 1.6] | 0.34s |
+| `CVaR_Cutoff (B=2.8s)` | 46.0% / 52.0% | 28.0% [16, 42] | 26.2+-1.1% (6.7%) | 5.60s / 5.60s [5.6, 5.6] | 5.60s |
+| `TW-Fast (Static Tier)` | 62.0% / 68.0% | 42.0% [28, 56] | 44.2+-3.0% (23.3%) | 9.70s / 27.07s [19.7, 35.0] | 16.05s |
+| `Entropy-Cascade` | 68.0% / 84.0% | 58.0% [44, 72] | 57.4+-2.3% (43.3%) | 25.12s / 45.06s [40.5, 47.9] | 28.81s |
+| `Sync_N_of_N` | 66.0% / 68.0% | 42.0% [28, 56] | 42.6+-1.9% (23.3%) | 35.64s / 46.83s [43.4, 53.6] | 30.19s |
+| `Genealogy_Sync_HPR` | 84.0% / 86.0% | 72.0% [58, 84] | 72.0+-1.6% (63.3%) | 36.34s / 47.39s [43.7, 53.6] | 30.19s |
+| **`QuorumGuard`** | **84.0% / 86.0%** | **72.0% [58, 84]** | **72.0+-1.6% (63.3%)** | **10.18s / 15.09s [13.8, 16.1]** | **13.24s** |
 
 ![Pareto Frontier](figures/fig3_pareto_latency_accuracy.png)
 
@@ -444,32 +454,39 @@ def build_hub_repo_staging(hub_dir: Path, username: str) -> None:
         REPO_ROOT / "paper" / "figures" / "fig0_architecture.png",
         hub_dir / "fig0_architecture.png",
     )
+    hub_paper = hub_dir / "paper"
+    hub_paper.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(REPO_ROOT / "paper" / "main.pdf", hub_paper / "main.pdf")
+    shutil.copy2(REPO_ROOT / "paper" / "highlights.pdf", hub_paper / "highlights.pdf")
 
     hub_card = f"""---
 license: apache-2.0
 library_name: transformers
 tags:
-  - vllm
   - multi-agent-systems
   - consensus
   - tail-latency
   - semantic-entropy
   - llm-agents
+  - vllm
 datasets:
   - {username}/QuorumBench
 base_model:
   - Qwen/Qwen2.5-3B-Instruct
   - Qwen/Qwen2.5-7B-Instruct
   - Qwen/Qwen2.5-Coder-14B-Instruct
+  - HuggingFaceTB/SmolLM2-1.7B-Instruct
+  - ibm-granite/granite-3.1-8b-instruct
 ---
 
-# QuorumGuard: Claim-Genealogy-Gated Hedged Quorums & vLLM Dissent Preemption
+# QuorumGuard: Claim-Genealogy-Gated Hedged Quorums & Priority Dissent Preemption
 
 * **Benchmark Dataset:** [`{username}/QuorumBench`](https://huggingface.co/datasets/{username}/QuorumBench)
 * **Interactive Simulator Space:** [`{username}/QuorumGuard-Explorer`](https://huggingface.co/spaces/{username}/QuorumGuard-Explorer)
+* **Paper PDF (10 pages):** [`paper/main.pdf`](paper/main.pdf)
 * **Source Code & Paper:** [`github.com/batistado/quorumguard`](https://github.com/batistado/quorumguard)
 
-`QuorumGuard` is a model-agnostic consensus controller and GPU priority-preemption scheduler for asynchronous multi-agent LLM committees. It requires zero weight modifications and operates directly on pre-commitment option logits, provenance DAGs, and `vLLM` request priorities.
+`QuorumGuard` is a model-agnostic consensus controller and quantum-preemptive priority scheduler for asynchronous multi-agent LLM committees. It requires zero weight modifications and operates on pre-commitment option logits, provenance DAGs, and priority-preemptive decode quanta (`Priority = -10` in both our live PyTorch MPS `DynamicCache` server and `vLLM`-compatible priority schedulers).
 
 ![QuorumGuard Overview](fig0_architecture.png)
 

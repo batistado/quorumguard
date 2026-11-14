@@ -354,6 +354,28 @@
           }
         ]
       }
+    ],
+    "multi_option_plurality_verification": [
+      {
+        "num_options": 4,
+        "trap_concentration_theta": 0.8,
+        "plurality_error_threshold_1_over_1plus_theta": 0.5556,
+        "phi_crit_theta": 0.55013,
+        "N": 63,
+        "k": 21,
+        "sync_plurality_error_mc": 0.006,
+        "fast_plurality_false_consensus_mc": 0.72488
+      },
+      {
+        "num_options": 4,
+        "trap_concentration_theta": 0.65,
+        "plurality_error_threshold_1_over_1plus_theta": 0.6061,
+        "phi_crit_theta": 0.42102,
+        "N": 63,
+        "k": 21,
+        "sync_plurality_error_mc": 0.00076,
+        "fast_plurality_false_consensus_mc": 0.55196
+      }
     ]
   },
   "theorem2_cascade_amplification": {
@@ -368,42 +390,54 @@
           "analytical_cascade_error": 0.56,
           "mc_cascade_error": 0.55745,
           "abs_diff": 0.00255,
-          "end_to_end_accuracy": 0.44255
+          "stage_m_output_accuracy": 0.44255,
+          "analytical_joint_m_stage_accuracy": 0.44,
+          "mc_joint_m_stage_accuracy": 0.44255
         },
         {
           "stage": 2,
           "analytical_cascade_error": 0.73741,
           "mc_cascade_error": 0.7367,
           "abs_diff": 0.00071,
-          "end_to_end_accuracy": 0.2633
+          "stage_m_output_accuracy": 0.2633,
+          "analytical_joint_m_stage_accuracy": 0.1936,
+          "mc_joint_m_stage_accuracy": 0.19423
         },
         {
           "stage": 3,
           "analytical_cascade_error": 0.79361,
           "mc_cascade_error": 0.79297,
           "abs_diff": 0.00064,
-          "end_to_end_accuracy": 0.20703
+          "stage_m_output_accuracy": 0.20703,
+          "analytical_joint_m_stage_accuracy": 0.08518,
+          "mc_joint_m_stage_accuracy": 0.08585
         },
         {
           "stage": 4,
           "analytical_cascade_error": 0.81142,
           "mc_cascade_error": 0.80805,
           "abs_diff": 0.00337,
-          "end_to_end_accuracy": 0.19195
+          "stage_m_output_accuracy": 0.19195,
+          "analytical_joint_m_stage_accuracy": 0.03748,
+          "mc_joint_m_stage_accuracy": 0.03818
         },
         {
           "stage": 5,
           "analytical_cascade_error": 0.81706,
           "mc_cascade_error": 0.8154,
           "abs_diff": 0.00166,
-          "end_to_end_accuracy": 0.1846
+          "stage_m_output_accuracy": 0.1846,
+          "analytical_joint_m_stage_accuracy": 0.01649,
+          "mc_joint_m_stage_accuracy": 0.01715
         },
         {
           "stage": 6,
           "analytical_cascade_error": 0.81884,
           "mc_cascade_error": 0.8185,
           "abs_diff": 0.00034,
-          "end_to_end_accuracy": 0.1815
+          "stage_m_output_accuracy": 0.1815,
+          "analytical_joint_m_stage_accuracy": 0.00726,
+          "mc_joint_m_stage_accuracy": 0.0078
         }
       ]
     },
@@ -418,81 +452,140 @@
           "analytical_cascade_error": 0.055,
           "mc_cascade_error": 0.05362,
           "abs_diff": 0.00138,
-          "end_to_end_accuracy": 0.94637
+          "stage_m_output_accuracy": 0.94637,
+          "analytical_joint_m_stage_accuracy": 0.945,
+          "mc_joint_m_stage_accuracy": 0.94637
         },
         {
           "stage": 2,
           "analytical_cascade_error": 0.09242,
           "mc_cascade_error": 0.0931,
           "abs_diff": 0.00068,
-          "end_to_end_accuracy": 0.9069
+          "stage_m_output_accuracy": 0.9069,
+          "analytical_joint_m_stage_accuracy": 0.89302,
+          "mc_joint_m_stage_accuracy": 0.89302
         },
         {
           "stage": 3,
           "analytical_cascade_error": 0.11788,
           "mc_cascade_error": 0.11845,
           "abs_diff": 0.00057,
-          "end_to_end_accuracy": 0.88155
+          "stage_m_output_accuracy": 0.88155,
+          "analytical_joint_m_stage_accuracy": 0.84391,
+          "mc_joint_m_stage_accuracy": 0.8432
         },
         {
           "stage": 4,
           "analytical_cascade_error": 0.13521,
           "mc_cascade_error": 0.1329,
           "abs_diff": 0.00231,
-          "end_to_end_accuracy": 0.8671
+          "stage_m_output_accuracy": 0.8671,
+          "analytical_joint_m_stage_accuracy": 0.79749,
+          "mc_joint_m_stage_accuracy": 0.79837
         },
         {
           "stage": 5,
           "analytical_cascade_error": 0.147,
           "mc_cascade_error": 0.14583,
           "abs_diff": 0.00117,
-          "end_to_end_accuracy": 0.85418
+          "stage_m_output_accuracy": 0.85418,
+          "analytical_joint_m_stage_accuracy": 0.75363,
+          "mc_joint_m_stage_accuracy": 0.75438
         },
         {
           "stage": 6,
           "analytical_cascade_error": 0.15502,
           "mc_cascade_error": 0.1529,
           "abs_diff": 0.00212,
-          "end_to_end_accuracy": 0.8471
+          "stage_m_output_accuracy": 0.8471,
+          "analytical_joint_m_stage_accuracy": 0.71218,
+          "mc_joint_m_stage_accuracy": 0.71257
         }
       ]
     }
   },
   "theorem3_cvar_optimality": {
-    "Fast_3_of_7": {
-      "accuracy": 0.5046,
-      "false_consensus_risk": 0.4954,
-      "mean_latency_s": 0.9884,
-      "p95_latency_s": 1.2609,
-      "cvar95_latency_s": 1.2913
+    "three_path_risk_verification": {
+      "num_options": 4,
+      "k_min": 3,
+      "zeta_blind": 0.04,
+      "eta_clean": 0.14,
+      "eta_hedge": 0.07,
+      "eta_sync": 0.11,
+      "path_probs": {
+        "clean": 0.42,
+        "hedge": 0.48,
+        "fallback": 0.1
+      },
+      "mc_empirical_stage_error": 0.06456,
+      "mc_standard_error": 0.00025,
+      "theorem3_1_upper_bound": 0.06486,
+      "bound_holds_within_mc_se": true
     },
-    "Sync_7_of_7": {
-      "accuracy": 0.7105,
-      "false_consensus_risk": 0.2895,
-      "mean_latency_s": 7.4325,
-      "p95_latency_s": 15.4217,
-      "cvar95_latency_s": 19.6052
-    },
-    "Genealogy_Sync_HPR": {
-      "accuracy": 0.9279,
-      "false_consensus_risk": 0.0721,
-      "mean_latency_s": 7.4325,
-      "p95_latency_s": 15.4217,
-      "cvar95_latency_s": 19.6052
-    },
-    "CVaR_Static_Cutoff": {
-      "accuracy": 0.471,
-      "false_consensus_risk": 0.529,
-      "mean_latency_s": 3.2,
-      "p95_latency_s": 3.2,
-      "cvar95_latency_s": 3.2
-    },
-    "QuorumGuard": {
-      "accuracy": 0.9278,
-      "false_consensus_risk": 0.0722,
-      "mean_latency_s": 2.5594,
-      "p95_latency_s": 4.6872,
-      "cvar95_latency_s": 5.6931
+    "preemptive_resume_mg1_verification": [
+      {
+        "rho": 0.58,
+        "rho_hi": 0.2729,
+        "w_fcfs_analytical_s": 4.0213,
+        "w_fcfs_sim_s": 3.8897,
+        "w_hi_quantum_analytical_s": 1.948,
+        "w_hi_quantum_sim_s": 1.8843,
+        "w_norm_pr_analytical_s": 6.2968,
+        "w_norm_pr_sim_s": 5.8556
+      },
+      {
+        "rho": 0.72,
+        "rho_hi": 0.3387,
+        "w_fcfs_analytical_s": 7.4879,
+        "w_fcfs_sim_s": 7.4643,
+        "w_hi_quantum_analytical_s": 2.6591,
+        "w_hi_quantum_sim_s": 2.7365,
+        "w_norm_pr_analytical_s": 12.3697,
+        "w_norm_pr_sim_s": 12.07
+      },
+      {
+        "rho": 0.85,
+        "rho_hi": 0.3999,
+        "w_fcfs_analytical_s": 16.5011,
+        "w_fcfs_sim_s": 15.995,
+        "w_hi_quantum_analytical_s": 3.4592,
+        "w_hi_quantum_sim_s": 3.4152,
+        "w_norm_pr_analytical_s": 28.8577,
+        "w_norm_pr_sim_s": 27.5526
+      },
+      {
+        "rho": 0.93,
+        "rho_hi": 0.4375,
+        "w_fcfs_analytical_s": 38.6874,
+        "w_fcfs_sim_s": 43.6709,
+        "w_hi_quantum_analytical_s": 4.038,
+        "w_hi_quantum_sim_s": 4.0453,
+        "w_norm_pr_analytical_s": 70.3695,
+        "w_norm_pr_sim_s": 79.6165
+      }
+    ],
+    "policy_monte_carlo": {
+      "Fast_3_of_7": {
+        "accuracy": 0.503,
+        "false_consensus_risk": 0.497,
+        "mean_latency_s": 0.9904,
+        "p95_latency_s": 1.2614,
+        "cvar95_latency_s": 1.2917
+      },
+      "Sync_7_of_7": {
+        "accuracy": 0.7088,
+        "false_consensus_risk": 0.2912,
+        "mean_latency_s": 7.4281,
+        "p95_latency_s": 15.3483,
+        "cvar95_latency_s": 19.6111
+      },
+      "Genealogy_Sync_HPR": {
+        "accuracy": 0.929,
+        "false_consensus_risk": 0.071,
+        "mean_latency_s": 7.4281,
+        "p95_latency_s": 15.3483,
+        "cvar95_latency_s": 19.6111
+      }
     }
   }
 }

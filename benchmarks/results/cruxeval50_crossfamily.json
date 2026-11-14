@@ -1,0 +1,1736 @@
+{
+  "cruxeval50_qwen": {
+    "suite": "cruxeval50_qwen",
+    "num_tasks": 50,
+    "fast_model": "Qwen/Qwen2.5-3B-Instruct",
+    "deep_model": "Qwen/Qwen2.5-7B-Instruct",
+    "covariance": {
+      "overall_cov_s": 0.6951,
+      "overall_pearson_r": 0.2694,
+      "pure_mps_cov_s": 0.4032,
+      "pure_mps_pearson_r": 0.2893
+    },
+    "policy_summary": {
+      "Fast_k_of_N": {
+        "stage1_accuracy": 0.42,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.36,
+        "joint_acc_ci95": [
+          0.24,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 1.1335,
+        "p95_latency_s": 1.4483,
+        "p95_ci95": [
+          1.367,
+          1.576
+        ],
+        "cvar95_latency_s": 1.5333
+      },
+      "Fast_3_of_N_Maj": {
+        "stage1_accuracy": 0.42,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.36,
+        "joint_acc_ci95": [
+          0.24,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 1.3303,
+        "p95_latency_s": 1.5686,
+        "p95_ci95": [
+          1.5,
+          1.684
+        ],
+        "cvar95_latency_s": 1.6434
+      },
+      "Tier_Weighted_Fast": {
+        "stage1_accuracy": 0.62,
+        "stage2_accuracy": 0.7,
+        "end_to_end_joint_accuracy": 0.56,
+        "joint_acc_ci95": [
+          0.42,
+          0.7
+        ],
+        "trap_joint_accuracy": 0.5278,
+        "mean_latency_s": 7.7332,
+        "p95_latency_s": 17.7901,
+        "p95_ci95": [
+          12.967,
+          24.141
+        ],
+        "cvar95_latency_s": 22.1142
+      },
+      "Entropy_Cascade": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.7,
+        "end_to_end_joint_accuracy": 0.58,
+        "joint_acc_ci95": [
+          0.44,
+          0.72
+        ],
+        "trap_joint_accuracy": 0.5556,
+        "mean_latency_s": 15.7949,
+        "p95_latency_s": 29.9305,
+        "p95_ci95": [
+          25.797,
+          30.997
+        ],
+        "cvar95_latency_s": 30.6259
+      },
+      "CVaR_B_1.5s": {
+        "stage1_accuracy": 0.42,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.36,
+        "joint_acc_ci95": [
+          0.24,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 3.0,
+        "p95_latency_s": 3.0,
+        "p95_ci95": [
+          3.0,
+          3.0
+        ],
+        "cvar95_latency_s": 3.0
+      },
+      "CVaR_B_2.8s": {
+        "stage1_accuracy": 0.5,
+        "stage2_accuracy": 0.42,
+        "end_to_end_joint_accuracy": 0.38,
+        "joint_acc_ci95": [
+          0.26,
+          0.52
+        ],
+        "trap_joint_accuracy": 0.3333,
+        "mean_latency_s": 5.6,
+        "p95_latency_s": 5.6,
+        "p95_ci95": [
+          5.6,
+          5.6
+        ],
+        "cvar95_latency_s": 5.6
+      },
+      "CVaR_B_6s": {
+        "stage1_accuracy": 0.52,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 11.9997,
+        "p95_latency_s": 12.0,
+        "p95_ci95": [
+          12.0,
+          12.0
+        ],
+        "cvar95_latency_s": 12.0
+      },
+      "CVaR_B_10s": {
+        "stage1_accuracy": 0.56,
+        "stage2_accuracy": 0.62,
+        "end_to_end_joint_accuracy": 0.5,
+        "joint_acc_ci95": [
+          0.36,
+          0.64
+        ],
+        "trap_joint_accuracy": 0.4444,
+        "mean_latency_s": 18.6499,
+        "p95_latency_s": 20.0,
+        "p95_ci95": [
+          20.0,
+          20.0
+        ],
+        "cvar95_latency_s": 20.0
+      },
+      "CVaR_B_15s": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.74
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 22.4014,
+        "p95_latency_s": 27.4899,
+        "p95_ci95": [
+          24.962,
+          30.0
+        ],
+        "cvar95_latency_s": 28.7251
+      },
+      "CVaR_B_22s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.72,
+        "end_to_end_joint_accuracy": 0.6,
+        "joint_acc_ci95": [
+          0.46,
+          0.74
+        ],
+        "trap_joint_accuracy": 0.5833,
+        "mean_latency_s": 23.7831,
+        "p95_latency_s": 30.6755,
+        "p95_ci95": [
+          29.705,
+          35.791
+        ],
+        "cvar95_latency_s": 33.0251
+      },
+      "CVaR_B_30s": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 23.8638,
+        "p95_latency_s": 31.3612,
+        "p95_ci95": [
+          30.01,
+          35.791
+        ],
+        "cvar95_latency_s": 33.2571
+      },
+      "Sync_N_of_N": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 23.8638,
+        "p95_latency_s": 31.3612,
+        "p95_ci95": [
+          30.01,
+          35.791
+        ],
+        "cvar95_latency_s": 33.2571
+      },
+      "Genealogy_Sync_HPR": {
+        "stage1_accuracy": 0.76,
+        "stage2_accuracy": 0.78,
+        "end_to_end_joint_accuracy": 0.66,
+        "joint_acc_ci95": [
+          0.52,
+          0.78
+        ],
+        "trap_joint_accuracy": 0.75,
+        "mean_latency_s": 24.0959,
+        "p95_latency_s": 31.3612,
+        "p95_ci95": [
+          30.101,
+          35.791
+        ],
+        "cvar95_latency_s": 33.2571
+      },
+      "QuorumGuard": {
+        "stage1_accuracy": 0.76,
+        "stage2_accuracy": 0.78,
+        "end_to_end_joint_accuracy": 0.66,
+        "joint_acc_ci95": [
+          0.52,
+          0.78
+        ],
+        "trap_joint_accuracy": 0.75,
+        "mean_latency_s": 7.0387,
+        "p95_latency_s": 9.7899,
+        "p95_ci95": [
+          8.474,
+          10.757
+        ],
+        "cvar95_latency_s": 10.551
+      }
+    },
+    "pure_hardware_only": {
+      "Fast_k_of_N": {
+        "stage1_accuracy": 0.42,
+        "stage2_accuracy": 0.42,
+        "end_to_end_joint_accuracy": 0.38,
+        "joint_acc_ci95": [
+          0.26,
+          0.52
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 0.2071,
+        "p95_latency_s": 0.2964,
+        "p95_ci95": [
+          0.246,
+          0.373
+        ],
+        "cvar95_latency_s": 0.3496
+      },
+      "Fast_3_of_N_Maj": {
+        "stage1_accuracy": 0.42,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.36,
+        "joint_acc_ci95": [
+          0.24,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 0.2271,
+        "p95_latency_s": 0.3151,
+        "p95_ci95": [
+          0.276,
+          0.445
+        ],
+        "cvar95_latency_s": 0.3985
+      },
+      "Tier_Weighted_Fast": {
+        "stage1_accuracy": 0.62,
+        "stage2_accuracy": 0.7,
+        "end_to_end_joint_accuracy": 0.56,
+        "joint_acc_ci95": [
+          0.42,
+          0.7
+        ],
+        "trap_joint_accuracy": 0.5278,
+        "mean_latency_s": 3.7108,
+        "p95_latency_s": 7.8252,
+        "p95_ci95": [
+          7.419,
+          9.673
+        ],
+        "cvar95_latency_s": 9.0369
+      },
+      "Entropy_Cascade": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.7,
+        "end_to_end_joint_accuracy": 0.58,
+        "joint_acc_ci95": [
+          0.44,
+          0.72
+        ],
+        "trap_joint_accuracy": 0.5556,
+        "mean_latency_s": 6.5665,
+        "p95_latency_s": 10.819,
+        "p95_ci95": [
+          10.579,
+          13.053
+        ],
+        "cvar95_latency_s": 12.1951
+      },
+      "CVaR_B_1.5s": {
+        "stage1_accuracy": 0.5,
+        "stage2_accuracy": 0.42,
+        "end_to_end_joint_accuracy": 0.38,
+        "joint_acc_ci95": [
+          0.26,
+          0.52
+        ],
+        "trap_joint_accuracy": 0.3333,
+        "mean_latency_s": 3.0,
+        "p95_latency_s": 3.0,
+        "p95_ci95": [
+          3.0,
+          3.0
+        ],
+        "cvar95_latency_s": 3.0
+      },
+      "CVaR_B_2.8s": {
+        "stage1_accuracy": 0.5,
+        "stage2_accuracy": 0.48,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.28,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 5.5596,
+        "p95_latency_s": 5.6,
+        "p95_ci95": [
+          5.6,
+          5.6
+        ],
+        "cvar95_latency_s": 5.6
+      },
+      "CVaR_B_6s": {
+        "stage1_accuracy": 0.6,
+        "stage2_accuracy": 0.7,
+        "end_to_end_joint_accuracy": 0.56,
+        "joint_acc_ci95": [
+          0.42,
+          0.7
+        ],
+        "trap_joint_accuracy": 0.5,
+        "mean_latency_s": 9.1467,
+        "p95_latency_s": 9.6928,
+        "p95_ci95": [
+          9.474,
+          11.709
+        ],
+        "cvar95_latency_s": 10.3841
+      },
+      "CVaR_B_10s": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 10.1238,
+        "p95_latency_s": 11.3459,
+        "p95_ci95": [
+          10.789,
+          15.709
+        ],
+        "cvar95_latency_s": 13.9584
+      },
+      "CVaR_B_15s": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 10.2008,
+        "p95_latency_s": 11.3459,
+        "p95_ci95": [
+          10.789,
+          19.561
+        ],
+        "cvar95_latency_s": 15.2421
+      },
+      "CVaR_B_22s": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 10.2008,
+        "p95_latency_s": 11.3459,
+        "p95_ci95": [
+          10.789,
+          19.561
+        ],
+        "cvar95_latency_s": 15.2421
+      },
+      "CVaR_B_30s": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 10.2008,
+        "p95_latency_s": 11.3459,
+        "p95_ci95": [
+          10.789,
+          19.561
+        ],
+        "cvar95_latency_s": 15.2421
+      },
+      "Sync_N_of_N": {
+        "stage1_accuracy": 0.68,
+        "stage2_accuracy": 0.74,
+        "end_to_end_joint_accuracy": 0.62,
+        "joint_acc_ci95": [
+          0.48,
+          0.76
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 10.2008,
+        "p95_latency_s": 11.3459,
+        "p95_ci95": [
+          10.789,
+          19.561
+        ],
+        "cvar95_latency_s": 15.2421
+      },
+      "Genealogy_Sync_HPR": {
+        "stage1_accuracy": 0.76,
+        "stage2_accuracy": 0.78,
+        "end_to_end_joint_accuracy": 0.66,
+        "joint_acc_ci95": [
+          0.52,
+          0.78
+        ],
+        "trap_joint_accuracy": 0.75,
+        "mean_latency_s": 10.2079,
+        "p95_latency_s": 11.3459,
+        "p95_ci95": [
+          10.784,
+          19.561
+        ],
+        "cvar95_latency_s": 15.2421
+      },
+      "QuorumGuard": {
+        "stage1_accuracy": 0.76,
+        "stage2_accuracy": 0.78,
+        "end_to_end_joint_accuracy": 0.66,
+        "joint_acc_ci95": [
+          0.52,
+          0.78
+        ],
+        "trap_joint_accuracy": 0.75,
+        "mean_latency_s": 4.2733,
+        "p95_latency_s": 5.2106,
+        "p95_ci95": [
+          5.013,
+          6.133
+        ],
+        "cvar95_latency_s": 5.8077
+      }
+    },
+    "multi_seed_10_runs": {
+      "Fast_k_of_N": {
+        "joint_acc_mean": 0.376,
+        "joint_acc_std": 0.0158,
+        "p95_mean_s": 1.425,
+        "p95_std_s": 0.028
+      },
+      "Fast_3_of_N_Maj": {
+        "joint_acc_mean": 0.378,
+        "joint_acc_std": 0.0148,
+        "p95_mean_s": 1.529,
+        "p95_std_s": 0.025
+      },
+      "Tier_Weighted_Fast": {
+        "joint_acc_mean": 0.566,
+        "joint_acc_std": 0.0284,
+        "p95_mean_s": 15.54,
+        "p95_std_s": 1.936
+      },
+      "Entropy_Cascade": {
+        "joint_acc_mean": 0.594,
+        "joint_acc_std": 0.0232,
+        "p95_mean_s": 29.026,
+        "p95_std_s": 1.798
+      },
+      "CVaR_B_1.5s": {
+        "joint_acc_mean": 0.374,
+        "joint_acc_std": 0.0097,
+        "p95_mean_s": 3.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_2.8s": {
+        "joint_acc_mean": 0.386,
+        "joint_acc_std": 0.0212,
+        "p95_mean_s": 5.6,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_6s": {
+        "joint_acc_mean": 0.428,
+        "joint_acc_std": 0.0169,
+        "p95_mean_s": 12.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_10s": {
+        "joint_acc_mean": 0.52,
+        "joint_acc_std": 0.0189,
+        "p95_mean_s": 20.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_15s": {
+        "joint_acc_mean": 0.618,
+        "joint_acc_std": 0.0175,
+        "p95_mean_s": 27.507,
+        "p95_std_s": 1.073
+      },
+      "CVaR_B_22s": {
+        "joint_acc_mean": 0.624,
+        "joint_acc_std": 0.0246,
+        "p95_mean_s": 30.907,
+        "p95_std_s": 0.847
+      },
+      "CVaR_B_30s": {
+        "joint_acc_mean": 0.63,
+        "joint_acc_std": 0.0236,
+        "p95_mean_s": 31.147,
+        "p95_std_s": 0.989
+      },
+      "Sync_N_of_N": {
+        "joint_acc_mean": 0.63,
+        "joint_acc_std": 0.0236,
+        "p95_mean_s": 31.147,
+        "p95_std_s": 0.989
+      },
+      "Genealogy_Sync_HPR": {
+        "joint_acc_mean": 0.67,
+        "joint_acc_std": 0.0105,
+        "p95_mean_s": 31.311,
+        "p95_std_s": 0.927
+      },
+      "QuorumGuard": {
+        "joint_acc_mean": 0.666,
+        "joint_acc_std": 0.0135,
+        "p95_mean_s": 9.507,
+        "p95_std_s": 0.482
+      }
+    }
+  },
+  "cruxeval50_cross_smol_granite": {
+    "suite": "cruxeval50_cross_smol_granite",
+    "num_tasks": 50,
+    "fast_model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "deep_model": "ibm-granite/granite-3.1-8b-instruct",
+    "covariance": {
+      "overall_cov_s": 0.6476,
+      "overall_pearson_r": 0.2224,
+      "pure_mps_cov_s": 0.4306,
+      "pure_mps_pearson_r": 0.2506
+    },
+    "policy_summary": {
+      "Fast_k_of_N": {
+        "stage1_accuracy": 0.46,
+        "stage2_accuracy": 0.24,
+        "end_to_end_joint_accuracy": 0.18,
+        "joint_acc_ci95": [
+          0.08,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0833,
+        "mean_latency_s": 1.1171,
+        "p95_latency_s": 1.358,
+        "p95_ci95": [
+          1.291,
+          1.414
+        ],
+        "cvar95_latency_s": 1.4034
+      },
+      "Fast_3_of_N_Maj": {
+        "stage1_accuracy": 0.46,
+        "stage2_accuracy": 0.22,
+        "end_to_end_joint_accuracy": 0.18,
+        "joint_acc_ci95": [
+          0.08,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0833,
+        "mean_latency_s": 1.2813,
+        "p95_latency_s": 1.4612,
+        "p95_ci95": [
+          1.43,
+          1.51
+        ],
+        "cvar95_latency_s": 1.4931
+      },
+      "Tier_Weighted_Fast": {
+        "stage1_accuracy": 0.62,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.36,
+        "joint_acc_ci95": [
+          0.24,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 8.4692,
+        "p95_latency_s": 20.1814,
+        "p95_ci95": [
+          13.706,
+          24.473
+        ],
+        "cvar95_latency_s": 23.212
+      },
+      "Entropy_Cascade": {
+        "stage1_accuracy": 0.74,
+        "stage2_accuracy": 0.6,
+        "end_to_end_joint_accuracy": 0.56,
+        "joint_acc_ci95": [
+          0.42,
+          0.7
+        ],
+        "trap_joint_accuracy": 0.5833,
+        "mean_latency_s": 24.9691,
+        "p95_latency_s": 33.3471,
+        "p95_ci95": [
+          30.304,
+          37.305
+        ],
+        "cvar95_latency_s": 36.0178
+      },
+      "CVaR_B_1.5s": {
+        "stage1_accuracy": 0.46,
+        "stage2_accuracy": 0.22,
+        "end_to_end_joint_accuracy": 0.18,
+        "joint_acc_ci95": [
+          0.08,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0833,
+        "mean_latency_s": 3.0,
+        "p95_latency_s": 3.0,
+        "p95_ci95": [
+          3.0,
+          3.0
+        ],
+        "cvar95_latency_s": 3.0
+      },
+      "CVaR_B_2.8s": {
+        "stage1_accuracy": 0.52,
+        "stage2_accuracy": 0.28,
+        "end_to_end_joint_accuracy": 0.22,
+        "joint_acc_ci95": [
+          0.1,
+          0.34
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 5.6,
+        "p95_latency_s": 5.6,
+        "p95_ci95": [
+          5.6,
+          5.6
+        ],
+        "cvar95_latency_s": 5.6
+      },
+      "CVaR_B_6s": {
+        "stage1_accuracy": 0.52,
+        "stage2_accuracy": 0.3,
+        "end_to_end_joint_accuracy": 0.24,
+        "joint_acc_ci95": [
+          0.12,
+          0.36
+        ],
+        "trap_joint_accuracy": 0.1944,
+        "mean_latency_s": 12.0,
+        "p95_latency_s": 12.0,
+        "p95_ci95": [
+          12.0,
+          12.0
+        ],
+        "cvar95_latency_s": 12.0
+      },
+      "CVaR_B_10s": {
+        "stage1_accuracy": 0.56,
+        "stage2_accuracy": 0.38,
+        "end_to_end_joint_accuracy": 0.3,
+        "joint_acc_ci95": [
+          0.18,
+          0.44
+        ],
+        "trap_joint_accuracy": 0.25,
+        "mean_latency_s": 18.9784,
+        "p95_latency_s": 20.0,
+        "p95_ci95": [
+          20.0,
+          20.0
+        ],
+        "cvar95_latency_s": 20.0
+      },
+      "CVaR_B_15s": {
+        "stage1_accuracy": 0.64,
+        "stage2_accuracy": 0.42,
+        "end_to_end_joint_accuracy": 0.38,
+        "joint_acc_ci95": [
+          0.26,
+          0.52
+        ],
+        "trap_joint_accuracy": 0.3333,
+        "mean_latency_s": 23.2805,
+        "p95_latency_s": 27.7375,
+        "p95_ci95": [
+          26.346,
+          29.185
+        ],
+        "cvar95_latency_s": 28.6552
+      },
+      "CVaR_B_22s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 24.5929,
+        "p95_latency_s": 31.1485,
+        "p95_ci95": [
+          29.205,
+          36.772
+        ],
+        "cvar95_latency_s": 34.8412
+      },
+      "CVaR_B_30s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 24.754,
+        "p95_latency_s": 33.0821,
+        "p95_ci95": [
+          29.53,
+          37.305
+        ],
+        "cvar95_latency_s": 36.0178
+      },
+      "Sync_N_of_N": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 24.754,
+        "p95_latency_s": 33.0821,
+        "p95_ci95": [
+          29.53,
+          37.305
+        ],
+        "cvar95_latency_s": 36.0178
+      },
+      "Genealogy_Sync_HPR": {
+        "stage1_accuracy": 0.74,
+        "stage2_accuracy": 0.62,
+        "end_to_end_joint_accuracy": 0.58,
+        "joint_acc_ci95": [
+          0.44,
+          0.72
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 24.9691,
+        "p95_latency_s": 33.3471,
+        "p95_ci95": [
+          30.304,
+          37.305
+        ],
+        "cvar95_latency_s": 36.0178
+      },
+      "QuorumGuard": {
+        "stage1_accuracy": 0.74,
+        "stage2_accuracy": 0.62,
+        "end_to_end_joint_accuracy": 0.58,
+        "joint_acc_ci95": [
+          0.44,
+          0.72
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 7.9858,
+        "p95_latency_s": 10.2483,
+        "p95_ci95": [
+          9.146,
+          11.648
+        ],
+        "cvar95_latency_s": 11.1721
+      }
+    },
+    "pure_hardware_only": {
+      "Fast_k_of_N": {
+        "stage1_accuracy": 0.46,
+        "stage2_accuracy": 0.24,
+        "end_to_end_joint_accuracy": 0.18,
+        "joint_acc_ci95": [
+          0.08,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0833,
+        "mean_latency_s": 0.1607,
+        "p95_latency_s": 0.2183,
+        "p95_ci95": [
+          0.188,
+          0.223
+        ],
+        "cvar95_latency_s": 0.2227
+      },
+      "Fast_3_of_N_Maj": {
+        "stage1_accuracy": 0.46,
+        "stage2_accuracy": 0.22,
+        "end_to_end_joint_accuracy": 0.18,
+        "joint_acc_ci95": [
+          0.08,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0833,
+        "mean_latency_s": 0.174,
+        "p95_latency_s": 0.2331,
+        "p95_ci95": [
+          0.207,
+          0.242
+        ],
+        "cvar95_latency_s": 0.2388
+      },
+      "Tier_Weighted_Fast": {
+        "stage1_accuracy": 0.58,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.34,
+        "joint_acc_ci95": [
+          0.22,
+          0.48
+        ],
+        "trap_joint_accuracy": 0.3056,
+        "mean_latency_s": 4.3454,
+        "p95_latency_s": 8.6365,
+        "p95_ci95": [
+          8.247,
+          12.091
+        ],
+        "cvar95_latency_s": 10.9165
+      },
+      "Entropy_Cascade": {
+        "stage1_accuracy": 0.74,
+        "stage2_accuracy": 0.6,
+        "end_to_end_joint_accuracy": 0.56,
+        "joint_acc_ci95": [
+          0.42,
+          0.7
+        ],
+        "trap_joint_accuracy": 0.5833,
+        "mean_latency_s": 11.7287,
+        "p95_latency_s": 12.5189,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "CVaR_B_1.5s": {
+        "stage1_accuracy": 0.44,
+        "stage2_accuracy": 0.22,
+        "end_to_end_joint_accuracy": 0.16,
+        "joint_acc_ci95": [
+          0.06,
+          0.26
+        ],
+        "trap_joint_accuracy": 0.0833,
+        "mean_latency_s": 3.0,
+        "p95_latency_s": 3.0,
+        "p95_ci95": [
+          3.0,
+          3.0
+        ],
+        "cvar95_latency_s": 3.0
+      },
+      "CVaR_B_2.8s": {
+        "stage1_accuracy": 0.52,
+        "stage2_accuracy": 0.3,
+        "end_to_end_joint_accuracy": 0.24,
+        "joint_acc_ci95": [
+          0.12,
+          0.36
+        ],
+        "trap_joint_accuracy": 0.1944,
+        "mean_latency_s": 5.5743,
+        "p95_latency_s": 5.6,
+        "p95_ci95": [
+          5.6,
+          5.6
+        ],
+        "cvar95_latency_s": 5.6
+      },
+      "CVaR_B_6s": {
+        "stage1_accuracy": 0.56,
+        "stage2_accuracy": 0.4,
+        "end_to_end_joint_accuracy": 0.32,
+        "joint_acc_ci95": [
+          0.2,
+          0.46
+        ],
+        "trap_joint_accuracy": 0.25,
+        "mean_latency_s": 9.5242,
+        "p95_latency_s": 9.8336,
+        "p95_ci95": [
+          9.774,
+          10.053
+        ],
+        "cvar95_latency_s": 9.9726
+      },
+      "CVaR_B_10s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 11.7324,
+        "p95_latency_s": 12.5171,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "CVaR_B_15s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 11.7324,
+        "p95_latency_s": 12.5171,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "CVaR_B_22s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 11.7324,
+        "p95_latency_s": 12.5171,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "CVaR_B_30s": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 11.7324,
+        "p95_latency_s": 12.5171,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "Sync_N_of_N": {
+        "stage1_accuracy": 0.66,
+        "stage2_accuracy": 0.44,
+        "end_to_end_joint_accuracy": 0.4,
+        "joint_acc_ci95": [
+          0.26,
+          0.54
+        ],
+        "trap_joint_accuracy": 0.3611,
+        "mean_latency_s": 11.7324,
+        "p95_latency_s": 12.5171,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "Genealogy_Sync_HPR": {
+        "stage1_accuracy": 0.74,
+        "stage2_accuracy": 0.62,
+        "end_to_end_joint_accuracy": 0.58,
+        "joint_acc_ci95": [
+          0.44,
+          0.72
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 11.7287,
+        "p95_latency_s": 12.5189,
+        "p95_ci95": [
+          12.333,
+          13.087
+        ],
+        "cvar95_latency_s": 12.9034
+      },
+      "QuorumGuard": {
+        "stage1_accuracy": 0.74,
+        "stage2_accuracy": 0.62,
+        "end_to_end_joint_accuracy": 0.58,
+        "joint_acc_ci95": [
+          0.44,
+          0.72
+        ],
+        "trap_joint_accuracy": 0.6111,
+        "mean_latency_s": 5.4038,
+        "p95_latency_s": 5.8572,
+        "p95_ci95": [
+          5.697,
+          6.121
+        ],
+        "cvar95_latency_s": 6.0372
+      }
+    },
+    "multi_seed_10_runs": {
+      "Fast_k_of_N": {
+        "joint_acc_mean": 0.212,
+        "joint_acc_std": 0.027,
+        "p95_mean_s": 1.396,
+        "p95_std_s": 0.025
+      },
+      "Fast_3_of_N_Maj": {
+        "joint_acc_mean": 0.21,
+        "joint_acc_std": 0.0356,
+        "p95_mean_s": 1.478,
+        "p95_std_s": 0.017
+      },
+      "Tier_Weighted_Fast": {
+        "joint_acc_mean": 0.372,
+        "joint_acc_std": 0.0454,
+        "p95_mean_s": 17.237,
+        "p95_std_s": 2.62
+      },
+      "Entropy_Cascade": {
+        "joint_acc_mean": 0.556,
+        "joint_acc_std": 0.0158,
+        "p95_mean_s": 32.497,
+        "p95_std_s": 0.899
+      },
+      "CVaR_B_1.5s": {
+        "joint_acc_mean": 0.214,
+        "joint_acc_std": 0.0353,
+        "p95_mean_s": 3.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_2.8s": {
+        "joint_acc_mean": 0.216,
+        "joint_acc_std": 0.0295,
+        "p95_mean_s": 5.6,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_6s": {
+        "joint_acc_mean": 0.22,
+        "joint_acc_std": 0.0389,
+        "p95_mean_s": 12.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_10s": {
+        "joint_acc_mean": 0.3,
+        "joint_acc_std": 0.0231,
+        "p95_mean_s": 20.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_15s": {
+        "joint_acc_mean": 0.42,
+        "joint_acc_std": 0.0432,
+        "p95_mean_s": 28.324,
+        "p95_std_s": 0.884
+      },
+      "CVaR_B_22s": {
+        "joint_acc_mean": 0.434,
+        "joint_acc_std": 0.0453,
+        "p95_mean_s": 32.015,
+        "p95_std_s": 0.758
+      },
+      "CVaR_B_30s": {
+        "joint_acc_mean": 0.432,
+        "joint_acc_std": 0.0454,
+        "p95_mean_s": 32.607,
+        "p95_std_s": 1.064
+      },
+      "Sync_N_of_N": {
+        "joint_acc_mean": 0.432,
+        "joint_acc_std": 0.0454,
+        "p95_mean_s": 32.607,
+        "p95_std_s": 1.064
+      },
+      "Genealogy_Sync_HPR": {
+        "joint_acc_mean": 0.576,
+        "joint_acc_std": 0.0084,
+        "p95_mean_s": 32.497,
+        "p95_std_s": 0.899
+      },
+      "QuorumGuard": {
+        "joint_acc_mean": 0.576,
+        "joint_acc_std": 0.0084,
+        "p95_mean_s": 10.38,
+        "p95_std_s": 0.359
+      }
+    }
+  },
+  "quorumbench30_cross_smol_granite": {
+    "suite": "quorumbench30_cross_smol_granite",
+    "num_tasks": 30,
+    "fast_model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "deep_model": "ibm-granite/granite-3.1-8b-instruct",
+    "covariance": {
+      "overall_cov_s": 1.0259,
+      "overall_pearson_r": 0.3643,
+      "pure_mps_cov_s": 0.5855,
+      "pure_mps_pearson_r": 0.3672
+    },
+    "policy_summary": {
+      "Fast_k_of_N": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 1.0703,
+        "p95_latency_s": 1.3217,
+        "p95_ci95": [
+          1.231,
+          1.329
+        ],
+        "cvar95_latency_s": 1.3276
+      },
+      "Fast_3_of_N_Maj": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 1.2096,
+        "p95_latency_s": 1.3758,
+        "p95_ci95": [
+          1.301,
+          1.391
+        ],
+        "cvar95_latency_s": 1.3868
+      },
+      "Tier_Weighted_Fast": {
+        "stage1_accuracy": 0.3333,
+        "stage2_accuracy": 0.4667,
+        "end_to_end_joint_accuracy": 0.3,
+        "joint_acc_ci95": [
+          0.1333,
+          0.4667
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 8.3442,
+        "p95_latency_s": 20.8885,
+        "p95_ci95": [
+          13.265,
+          24.844
+        ],
+        "cvar95_latency_s": 23.0464
+      },
+      "Entropy_Cascade": {
+        "stage1_accuracy": 0.7333,
+        "stage2_accuracy": 0.8,
+        "end_to_end_joint_accuracy": 0.6333,
+        "joint_acc_ci95": [
+          0.4667,
+          0.8
+        ],
+        "trap_joint_accuracy": 0.4444,
+        "mean_latency_s": 24.7546,
+        "p95_latency_s": 34.2091,
+        "p95_ci95": [
+          28.068,
+          40.797
+        ],
+        "cvar95_latency_s": 37.9887
+      },
+      "CVaR_B_1.5s": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 3.0,
+        "p95_latency_s": 3.0,
+        "p95_ci95": [
+          3.0,
+          3.0
+        ],
+        "cvar95_latency_s": 3.0
+      },
+      "CVaR_B_2.8s": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 5.6,
+        "p95_latency_s": 5.6,
+        "p95_ci95": [
+          5.6,
+          5.6
+        ],
+        "cvar95_latency_s": 5.6
+      },
+      "CVaR_B_6s": {
+        "stage1_accuracy": 0.2333,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 12.0,
+        "p95_latency_s": 12.0,
+        "p95_ci95": [
+          12.0,
+          12.0
+        ],
+        "cvar95_latency_s": 12.0
+      },
+      "CVaR_B_10s": {
+        "stage1_accuracy": 0.2333,
+        "stage2_accuracy": 0.3,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 19.0932,
+        "p95_latency_s": 20.0,
+        "p95_ci95": [
+          20.0,
+          20.0
+        ],
+        "cvar95_latency_s": 20.0
+      },
+      "CVaR_B_15s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.4667,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 24.2459,
+        "p95_latency_s": 29.2527,
+        "p95_ci95": [
+          27.213,
+          30.0
+        ],
+        "cvar95_latency_s": 29.6656
+      },
+      "CVaR_B_22s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 25.9452,
+        "p95_latency_s": 34.2091,
+        "p95_ci95": [
+          30.421,
+          39.438
+        ],
+        "cvar95_latency_s": 37.3093
+      },
+      "CVaR_B_30s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 26.0648,
+        "p95_latency_s": 34.2091,
+        "p95_ci95": [
+          30.636,
+          40.797
+        ],
+        "cvar95_latency_s": 37.9887
+      },
+      "Sync_N_of_N": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 26.0648,
+        "p95_latency_s": 34.2091,
+        "p95_ci95": [
+          30.636,
+          40.797
+        ],
+        "cvar95_latency_s": 37.9887
+      },
+      "Genealogy_Sync_HPR": {
+        "stage1_accuracy": 0.7667,
+        "stage2_accuracy": 0.8333,
+        "end_to_end_joint_accuracy": 0.6667,
+        "joint_acc_ci95": [
+          0.5,
+          0.8333
+        ],
+        "trap_joint_accuracy": 0.5,
+        "mean_latency_s": 24.7566,
+        "p95_latency_s": 34.2091,
+        "p95_ci95": [
+          28.068,
+          40.797
+        ],
+        "cvar95_latency_s": 37.9887
+      },
+      "QuorumGuard": {
+        "stage1_accuracy": 0.7333,
+        "stage2_accuracy": 0.8,
+        "end_to_end_joint_accuracy": 0.6333,
+        "joint_acc_ci95": [
+          0.4667,
+          0.8
+        ],
+        "trap_joint_accuracy": 0.4444,
+        "mean_latency_s": 7.6803,
+        "p95_latency_s": 9.6743,
+        "p95_ci95": [
+          8.377,
+          11.107
+        ],
+        "cvar95_latency_s": 10.3932
+      }
+    },
+    "pure_hardware_only": {
+      "Fast_k_of_N": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 0.0861,
+        "p95_latency_s": 0.1006,
+        "p95_ci95": [
+          0.094,
+          0.113
+        ],
+        "cvar95_latency_s": 0.1069
+      },
+      "Fast_3_of_N_Maj": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 0.093,
+        "p95_latency_s": 0.1158,
+        "p95_ci95": [
+          0.101,
+          0.134
+        ],
+        "cvar95_latency_s": 0.1267
+      },
+      "Tier_Weighted_Fast": {
+        "stage1_accuracy": 0.3333,
+        "stage2_accuracy": 0.4667,
+        "end_to_end_joint_accuracy": 0.3,
+        "joint_acc_ci95": [
+          0.1333,
+          0.4667
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 3.7446,
+        "p95_latency_s": 8.2047,
+        "p95_ci95": [
+          7.628,
+          11.224
+        ],
+        "cvar95_latency_s": 9.7402
+      },
+      "Entropy_Cascade": {
+        "stage1_accuracy": 0.7333,
+        "stage2_accuracy": 0.8,
+        "end_to_end_joint_accuracy": 0.6333,
+        "joint_acc_ci95": [
+          0.4667,
+          0.8
+        ],
+        "trap_joint_accuracy": 0.4444,
+        "mean_latency_s": 10.7506,
+        "p95_latency_s": 11.5319,
+        "p95_ci95": [
+          11.175,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "CVaR_B_1.5s": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 3.0,
+        "p95_latency_s": 3.0,
+        "p95_ci95": [
+          3.0,
+          3.0
+        ],
+        "cvar95_latency_s": 3.0
+      },
+      "CVaR_B_2.8s": {
+        "stage1_accuracy": 0.2667,
+        "stage2_accuracy": 0.2333,
+        "end_to_end_joint_accuracy": 0.1667,
+        "joint_acc_ci95": [
+          0.0333,
+          0.3
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 5.5713,
+        "p95_latency_s": 5.6,
+        "p95_ci95": [
+          5.6,
+          5.6
+        ],
+        "cvar95_latency_s": 5.6
+      },
+      "CVaR_B_6s": {
+        "stage1_accuracy": 0.2333,
+        "stage2_accuracy": 0.3667,
+        "end_to_end_joint_accuracy": 0.2,
+        "joint_acc_ci95": [
+          0.0667,
+          0.3333
+        ],
+        "trap_joint_accuracy": 0.0,
+        "mean_latency_s": 9.2933,
+        "p95_latency_s": 9.4653,
+        "p95_ci95": [
+          9.46,
+          9.558
+        ],
+        "cvar95_latency_s": 9.5121
+      },
+      "CVaR_B_10s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 10.7498,
+        "p95_latency_s": 11.5304,
+        "p95_ci95": [
+          11.163,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "CVaR_B_15s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 10.7498,
+        "p95_latency_s": 11.5304,
+        "p95_ci95": [
+          11.163,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "CVaR_B_22s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 10.7498,
+        "p95_latency_s": 11.5304,
+        "p95_ci95": [
+          11.163,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "CVaR_B_30s": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 10.7498,
+        "p95_latency_s": 11.5304,
+        "p95_ci95": [
+          11.163,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "Sync_N_of_N": {
+        "stage1_accuracy": 0.4,
+        "stage2_accuracy": 0.5,
+        "end_to_end_joint_accuracy": 0.3333,
+        "joint_acc_ci95": [
+          0.1667,
+          0.5
+        ],
+        "trap_joint_accuracy": 0.1667,
+        "mean_latency_s": 10.7498,
+        "p95_latency_s": 11.5304,
+        "p95_ci95": [
+          11.163,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "Genealogy_Sync_HPR": {
+        "stage1_accuracy": 0.7667,
+        "stage2_accuracy": 0.8333,
+        "end_to_end_joint_accuracy": 0.6667,
+        "joint_acc_ci95": [
+          0.5,
+          0.8333
+        ],
+        "trap_joint_accuracy": 0.5,
+        "mean_latency_s": 10.7388,
+        "p95_latency_s": 11.5319,
+        "p95_ci95": [
+          11.175,
+          11.859
+        ],
+        "cvar95_latency_s": 11.7423
+      },
+      "QuorumGuard": {
+        "stage1_accuracy": 0.7333,
+        "stage2_accuracy": 0.8,
+        "end_to_end_joint_accuracy": 0.6333,
+        "joint_acc_ci95": [
+          0.4667,
+          0.8
+        ],
+        "trap_joint_accuracy": 0.4444,
+        "mean_latency_s": 4.7698,
+        "p95_latency_s": 5.2997,
+        "p95_ci95": [
+          5.101,
+          5.471
+        ],
+        "cvar95_latency_s": 5.4107
+      }
+    },
+    "multi_seed_10_runs": {
+      "Fast_k_of_N": {
+        "joint_acc_mean": 0.1667,
+        "joint_acc_std": 0.0272,
+        "p95_mean_s": 1.302,
+        "p95_std_s": 0.031
+      },
+      "Fast_3_of_N_Maj": {
+        "joint_acc_mean": 0.1667,
+        "joint_acc_std": 0.0272,
+        "p95_mean_s": 1.38,
+        "p95_std_s": 0.028
+      },
+      "Tier_Weighted_Fast": {
+        "joint_acc_mean": 0.31,
+        "joint_acc_std": 0.0353,
+        "p95_mean_s": 15.979,
+        "p95_std_s": 1.914
+      },
+      "Entropy_Cascade": {
+        "joint_acc_mean": 0.6367,
+        "joint_acc_std": 0.0246,
+        "p95_mean_s": 31.357,
+        "p95_std_s": 1.131
+      },
+      "CVaR_B_1.5s": {
+        "joint_acc_mean": 0.1567,
+        "joint_acc_std": 0.0225,
+        "p95_mean_s": 3.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_2.8s": {
+        "joint_acc_mean": 0.1567,
+        "joint_acc_std": 0.0225,
+        "p95_mean_s": 5.6,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_6s": {
+        "joint_acc_mean": 0.1567,
+        "joint_acc_std": 0.0225,
+        "p95_mean_s": 12.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_10s": {
+        "joint_acc_mean": 0.21,
+        "joint_acc_std": 0.0225,
+        "p95_mean_s": 20.0,
+        "p95_std_s": 0.0
+      },
+      "CVaR_B_15s": {
+        "joint_acc_mean": 0.32,
+        "joint_acc_std": 0.0477,
+        "p95_mean_s": 27.929,
+        "p95_std_s": 0.946
+      },
+      "CVaR_B_22s": {
+        "joint_acc_mean": 0.3467,
+        "joint_acc_std": 0.0358,
+        "p95_mean_s": 31.127,
+        "p95_std_s": 1.197
+      },
+      "CVaR_B_30s": {
+        "joint_acc_mean": 0.3633,
+        "joint_acc_std": 0.0292,
+        "p95_mean_s": 31.382,
+        "p95_std_s": 1.303
+      },
+      "Sync_N_of_N": {
+        "joint_acc_mean": 0.3633,
+        "joint_acc_std": 0.0292,
+        "p95_mean_s": 31.382,
+        "p95_std_s": 1.303
+      },
+      "Genealogy_Sync_HPR": {
+        "joint_acc_mean": 0.6667,
+        "joint_acc_std": 0.0,
+        "p95_mean_s": 31.357,
+        "p95_std_s": 1.131
+      },
+      "QuorumGuard": {
+        "joint_acc_mean": 0.6333,
+        "joint_acc_std": 0.0,
+        "p95_mean_s": 9.874,
+        "p95_std_s": 0.849
+      }
+    }
+  }
+}

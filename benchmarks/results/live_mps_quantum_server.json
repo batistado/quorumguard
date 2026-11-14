@@ -1,0 +1,59 @@
+{
+  "hardware": "Apple M5 Pro MPS (48 GB Unified Memory, FP16)",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "quantum_tokens": 8,
+  "num_requests_per_policy": 64,
+  "target_utilization_rho": 0.82,
+  "calibrated_prefill_ms": 146.52,
+  "calibrated_8tok_quantum_ms": 647.66,
+  "policies": {
+    "FCFS_Default": {
+      "num_requests": 64,
+      "preemptions": 0,
+      "max_concurrent_kv_caches": 1,
+      "peak_mps_allocated_gb": 15.497,
+      "peak_mps_driver_gb": 17.281,
+      "dissent_straggler_mean_turnaround_s": 13.5095,
+      "dissent_straggler_p95_turnaround_s": 26.574,
+      "dissent_straggler_cvar95_turnaround_s": 35.3332,
+      "dissent_straggler_mean_queue_wait_s": 3.6616,
+      "foreground_normal_mean_turnaround_s": 9.1582,
+      "foreground_normal_p95_turnaround_s": 29.194,
+      "total_wall_clock_s": 383.016
+    },
+    "Unbounded_Urgent": {
+      "num_requests": 64,
+      "preemptions": 8,
+      "max_concurrent_kv_caches": 2,
+      "peak_mps_allocated_gb": 15.499,
+      "peak_mps_driver_gb": 16.275,
+      "dissent_straggler_mean_turnaround_s": 15.3784,
+      "dissent_straggler_p95_turnaround_s": 39.8769,
+      "dissent_straggler_cvar95_turnaround_s": 58.5134,
+      "dissent_straggler_mean_queue_wait_s": 6.0595,
+      "foreground_normal_mean_turnaround_s": 8.6612,
+      "foreground_normal_p95_turnaround_s": 35.5392,
+      "total_wall_clock_s": 399.944
+    },
+    "QuorumGuard_Budgeted": {
+      "num_requests": 64,
+      "preemptions": 4,
+      "max_concurrent_kv_caches": 2,
+      "peak_mps_allocated_gb": 15.503,
+      "peak_mps_driver_gb": 16.275,
+      "dissent_straggler_mean_turnaround_s": 11.806,
+      "dissent_straggler_p95_turnaround_s": 13.817,
+      "dissent_straggler_cvar95_turnaround_s": 13.9062,
+      "dissent_straggler_mean_queue_wait_s": 0.3119,
+      "foreground_normal_mean_turnaround_s": 16.3286,
+      "foreground_normal_p95_turnaround_s": 48.6927,
+      "total_wall_clock_s": 399.926
+    }
+  },
+  "summary_comparisons": {
+    "queue_wait_compression_x": 11.74,
+    "p95_turnaround_speedup_x": 1.923,
+    "quorumguard_foreground_p95_impact_pct": 66.79,
+    "unbounded_foreground_p95_impact_pct": 21.73
+  }
+}

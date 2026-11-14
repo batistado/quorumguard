@@ -42,9 +42,9 @@ plt.rcParams.update(
 
 
 def draw_architecture_overview(out_path: Path) -> None:
-    fig, ax = plt.subplots(figsize=(11.2, 3.55))
-    ax.set_xlim(0, 11.2)
-    ax.set_ylim(0, 3.55)
+    fig, ax = plt.subplots(figsize=(11.6, 3.65))
+    ax.set_xlim(0, 11.6)
+    ax.set_ylim(-0.08, 3.62)
     ax.axis("off")
 
     def box(x: float, y: float, w: float, h: float, title: str, body: str, fc: str, ec: str) -> None:
@@ -52,48 +52,55 @@ def draw_architecture_overview(out_path: Path) -> None:
             (x, y), w, h, boxstyle="round,pad=0.06,rounding_size=0.08", facecolor=fc, edgecolor=ec, linewidth=1.4
         )
         ax.add_patch(rect)
-        ax.text(x + w / 2, y + h - 0.24, title, ha="center", va="center", fontsize=9.4, fontweight="bold", color="#1A202C")
-        ax.text(x + w / 2, y + (h - 0.28) / 2, body, ha="center", va="center", fontsize=8.1, color="#2D3748")
+        ax.text(x + w / 2, y + h - 0.24, title, ha="center", va="center", fontsize=9.2, fontweight="bold", color="#1A202C")
+        ax.text(x + w / 2, y + (h - 0.28) / 2, body, ha="center", va="center", fontsize=7.9, color="#2D3748")
 
-    # Left column: Heterogeneous Asynchronous Agent Pool
-    box(0.15, 2.38, 2.85, 0.96, "Fast Shallow Tier (0.4s - 0.9s)", "Agents 0, 1 (Shared Triage Root r0)\nAgent 2 (Direct Scan Root r1)", "#FFF5F5", "#C53030")
-    box(0.15, 1.26, 2.85, 0.94, "Medium CoT Verifiers (2.1s - 6.8s)", "Agent 3 (Short Check r2)\nAgent 4 (7B Step-by-Step CoT r3)", "#FEFCBF", "#B7791F")
-    box(0.15, 0.14, 2.85, 0.94, "Deep Tool Stragglers (10s - 18s)", "Agents 5, 6 (14B-Coder + Py Sandbox)\nIndependent Verified Roots r4, r5", "#E6FFFA", "#2C7A7B")
+    # Left column: Heterogeneous Asynchronous Agent Pool (x = 0.12 .. 2.74)
+    box(0.12, 2.42, 2.62, 0.96, "Fast Shallow Tier (0.4s - 0.9s)", "Agents 0, 1 (Shared Triage Root r0)\nAgent 2 (Direct Scan Root r1)", "#FFF5F5", "#C53030")
+    box(0.12, 1.30, 2.62, 0.94, "Medium CoT Verifiers (2.1s - 6.8s)", "Agent 3 (Short Check r2)\nAgent 4 (CoT Reviewer r3)", "#FEFCBF", "#B7791F")
+    box(0.12, 0.18, 2.62, 0.94, "Deep Tool Stragglers (10s - 18s)", "Agents 5, 6 (Deep Model + Py Sandbox)\nIndependent Verified Roots r4, r5", "#E6FFFA", "#2C7A7B")
 
-    # Center: QuorumGuard Online Controller
+    # Center: QuorumGuard Online Controller (x = 3.92 .. 7.98) — ample open channel (2.74 .. 3.92) for feedback arrow!
     rect_qg = mpatches.FancyBboxPatch(
-        (3.55, 0.14), 4.15, 3.20, boxstyle="round,pad=0.07,rounding_size=0.10", facecolor="#F0FFF4", edgecolor="#276749", linewidth=1.8
+        (3.92, 0.18), 4.06, 3.20, boxstyle="round,pad=0.07,rounding_size=0.10", facecolor="#F0FFF4", edgecolor="#276749", linewidth=1.8
     )
     ax.add_patch(rect_qg)
-    ax.text(5.625, 3.12, "QuorumGuard Adaptive Gate & Scheduler", ha="center", va="center", fontsize=10.3, fontweight="bold", color="#1C4532")
+    ax.text(5.95, 3.16, "QuorumGuard Adaptive Gate & Scheduler", ha="center", va="center", fontsize=10.0, fontweight="bold", color="#1C4532")
 
-    box(3.78, 2.12, 3.68, 0.78, "1. Pre-Commitment Semantic Entropy Gate", "Probes 4-way posterior H_ans & margin Delta BEFORE letter\nemission; discounts unverified high-entropy guesses.", "#FFFFFF", "#2F855A")
-    box(3.78, 1.18, 3.68, 0.78, "2. Claim-Genealogy Independence (N_eff)", "Resolves provenance DAG G: shared echoes (r0) collapse\nto <= 1 root capacity; requires k* independent roots.", "#FFFFFF", "#2F855A")
-    box(3.78, 0.24, 3.68, 0.78, "3. Token-Bucket Priority Dissent Boosting", "On root correlation / dissent, elevates active 14B straggler\nto vLLM Priority = -10 (4.3x - 6.0x queue-wait compression).", "#FFFFFF", "#2C5282")
+    box(4.12, 2.16, 3.66, 0.78, "1. Pre-Commitment Semantic Entropy Gate", "Probes 4-way posterior H_ans & margin Delta BEFORE\nletter emission; discounts high-entropy guesses.", "#FFFFFF", "#2F855A")
+    box(4.12, 1.22, 3.66, 0.78, "2. Claim-Genealogy Independence (N_eff)", "Resolves provenance DAG G: shared echoes (r0)\ncollapse to <= 1 root; requires k* indep. roots.", "#FFFFFF", "#2F855A")
+    box(4.12, 0.28, 3.66, 0.78, "3. Token-Bucket Priority Dissent Boosting", "On dissent/correlation, boosts active deep verifier\nto Priority = -10 at 8-token quantum boundaries.", "#FFFFFF", "#2C5282")
 
-    # Right: Dual Regime Outcomes -> Stage 2 Downstream Committee
-    box(8.25, 2.02, 2.80, 1.28, "Clean Routine Path (< 2.0s)", "3 indep. roots agree, H_ans <= 0.08\n-> Immediate Fast Closure!\nCancels unboosted tail stragglers", "#EBF8FF", "#2B6CB0")
-    box(8.25, 0.20, 2.80, 1.52, "Dissent-Hedged Path (~4s - 6s)", "Blocks false fast-quorum herding!\nBoosted 14B + Sandbox verifies truth\n-> Prevents Stage-2 Error Cascade", "#FAF5FF", "#553C9A")
+    # Right: Dual Regime Outcomes -> Stage 2 Downstream Committee (x = 8.58 .. 11.45)
+    box(8.58, 2.06, 2.84, 1.28, "Clean Routine Path (< 2.0s)", "3 indep. roots agree, H_ans <= 0.08\n-> Immediate Fast Closure\nCancels unboosted tail stragglers", "#EBF8FF", "#2B6CB0")
+    box(8.58, 0.22, 2.84, 1.52, "Dissent-Hedged Path (~4s - 6s)", "Blocks false fast-quorum herding\nBoosted Verifier + Sandbox confirms\n-> Prevents Stage-2 Error Cascade", "#FAF5FF", "#553C9A")
 
     arrow_kw = dict(arrowstyle="->,head_width=0.22,head_length=0.22", lw=1.4, color="#4A5568")
-    ax.annotate("", xy=(3.53, 2.75), xytext=(3.02, 2.82), arrowprops=arrow_kw)
-    ax.annotate("", xy=(3.53, 1.72), xytext=(3.02, 1.72), arrowprops=arrow_kw)
-    ax.annotate("", xy=(3.53, 0.65), xytext=(3.02, 0.62), arrowprops=arrow_kw)
-    # Feedback boost arrow from Pillar 3 back to Deep Tool Stragglers
+    ax.annotate("", xy=(3.88, 2.85), xytext=(2.78, 2.88), arrowprops=arrow_kw)
+    ax.annotate("", xy=(3.88, 1.76), xytext=(2.78, 1.76), arrowprops=arrow_kw)
+    ax.annotate("", xy=(3.88, 0.80), xytext=(2.78, 0.80), arrowprops=arrow_kw)
+    # Non-overlapping feedback boost arrow in open inter-column channel (x = 2.78 .. 3.92)
     ax.annotate(
-        "vLLM Priority=-10",
-        xy=(3.02, 0.32),
-        xytext=(3.76, 0.36),
-        arrowprops=dict(arrowstyle="->,head_width=0.2,head_length=0.2", lw=1.4, color="#C53030", ls="--"),
-        fontsize=7.5,
+        "",
+        xy=(2.78, 0.36),
+        xytext=(3.88, 0.36),
+        arrowprops=dict(arrowstyle="->,head_width=0.22,head_length=0.22", lw=1.6, color="#C53030", ls="--"),
+    )
+    ax.text(
+        3.33,
+        0.10,
+        "Priority = -10\nPreempt",
+        ha="center",
+        va="center",
+        fontsize=7.6,
         color="#C53030",
         fontweight="bold",
-        va="bottom",
+        bbox=dict(boxstyle="round,pad=0.14", facecolor="#FFF5F5", edgecolor="#FEB2B2", lw=0.8),
     )
-    ax.annotate("", xy=(8.22, 2.62), xytext=(7.72, 2.48), arrowprops=arrow_kw)
-    ax.annotate("", xy=(8.22, 0.98), xytext=(7.72, 1.15), arrowprops=arrow_kw)
+    ax.annotate("", xy=(8.54, 2.66), xytext=(8.02, 2.52), arrowprops=arrow_kw)
+    ax.annotate("", xy=(8.54, 1.00), xytext=(8.02, 1.15), arrowprops=arrow_kw)
 
-    fig.tight_layout(pad=0.2)
+    fig.tight_layout(pad=0.15)
     fig.savefig(out_path)
     fig.savefig(out_path.with_suffix(".png"), dpi=220)
     plt.close(fig)
@@ -145,65 +152,108 @@ def main() -> None:
     plt.close(fig)
 
     # --- Figure 2: Theorem 2 Multi-Stage DAG Cascade Amplification ---
-    fig, ax = plt.subplots(figsize=(5.4, 3.5))
+    fig, ax = plt.subplots(figsize=(5.5, 3.55))
     t2 = thm["theorem2_cascade_amplification"]
     st_fast = t2["fast_k_of_n"]["stages"]
     st_qg = t2["quorumguard"]["stages"]
     m_vals = [s["stage"] for s in st_fast]
     ax.plot(
         m_vals,
-        [s["end_to_end_accuracy"] * 100.0 for s in st_qg],
+        [s["stage_m_output_accuracy"] * 100.0 for s in st_qg],
         marker="o",
         linewidth=2.2,
         color="#1B7837",
-        label="QuorumGuard (Empirical + Analytical)",
+        label="QuorumGuard Marginal Stage-$M$ ($1 - q_M$)",
     )
     ax.plot(
         m_vals,
-        [(1.0 - s["analytical_cascade_error"]) * 100.0 for s in st_qg],
-        linestyle="--",
-        linewidth=1.2,
+        [s["mc_joint_m_stage_accuracy"] * 100.0 for s in st_qg],
+        linestyle=":",
+        marker=".",
+        linewidth=1.6,
         color="#1B7837",
+        label="QuorumGuard All-$M$ Joint Survival",
     )
     ax.plot(
         m_vals,
-        [s["end_to_end_accuracy"] * 100.0 for s in st_fast],
+        [s["stage_m_output_accuracy"] * 100.0 for s in st_fast],
         marker="s",
         linewidth=2.2,
         color="#C44E52",
-        label="Static Fast $k$-of-$N$ Quorum",
+        label="Fast $k$-of-$N$ Marginal Stage-$M$ ($1 - q_M$)",
+    )
+    ax.plot(
+        m_vals,
+        [s["mc_joint_m_stage_accuracy"] * 100.0 for s in st_fast],
+        linestyle=":",
+        marker="x",
+        linewidth=1.6,
+        color="#C44E52",
+        label="Fast $k$-of-$N$ All-$M$ Joint Survival",
     )
     ax.set_xlabel("Workflow DAG Depth $M$ (Stages)")
-    ax.set_ylabel("End-to-End Workflow Accuracy (%)")
-    ax.set_title("Theorem 2: Multi-Stage Error Cascade & Herding Stability")
+    ax.set_ylabel("Stage-$M$ Output & Joint Accuracy (%)")
+    ax.set_title("Theorem 2: Marginal $1-q_M$ vs. Joint Survival")
     ax.set_xticks(m_vals)
     ax.set_ylim(0, 102)
-    ax.legend(loc="center right", frameon=True)
+    ax.legend(loc="center right", fontsize=7.6, frameon=True)
     fig.tight_layout()
     fig.savefig(fig_dir / "fig2_cascade_amplification.pdf")
     fig.savefig(fig_dir / "fig2_cascade_amplification.png", dpi=220)
     plt.close(fig)
 
     # --- Figure 3: Live MPS 2-Stage Accuracy vs. P95 Latency Pareto Frontier ---
-    fig, ax = plt.subplots(figsize=(5.8, 3.65))
-    psum = pilot["policy_summary"]
-    pol_meta = [
-        ("Fast_k_of_N", "Fast $k$-of-$N$", "#C44E52", "s"),
-        ("CVaR_Static_Cutoff", "CVaR Static Cutoff", "#DD8452", "^"),
-        ("Sync_N_of_N", "Sync $N$-of-$N$ Barrier", "#4C72B0", "D"),
-        ("Genealogy_Sync_HPR", "Genealogy Sync (HPR)", "#8172B2", "P"),
-        ("QuorumGuard", "QuorumGuard (Ours)", "#1B7837", "*"),
-    ]
-    for key, label, col, mk in pol_meta:
-        st = psum[key]
-        x = st["p95_workflow_latency_s"]
-        y = st["end_to_end_joint_accuracy"] * 100.0
-        sz = 195 if key == "QuorumGuard" else 95
-        ax.scatter([x], [y], color=col, marker=mk, s=sz, zorder=4, label=f"{label} ({x:.1f}s, {y:.1f}%)")
+    fig, ax = plt.subplots(figsize=(5.9, 3.7))
+    rev_path = bench_res_dir / "revision_ablations_and_sweeps.json"
+    if rev_path.exists():
+        rev = json.loads(rev_path.read_text())
+        ext_sum = rev["extended_policies_with_ci95"]
+        cvar_keys = [
+            ("CVaR_B_1.5s", 1.5),
+            ("CVaR_B_2.8s", 2.8),
+            ("CVaR_B_6s", 6.0),
+            ("CVaR_B_10s", 10.0),
+            ("CVaR_B_15s", 15.0),
+            ("CVaR_B_22s", 22.0),
+            ("CVaR_B_30s", 30.0),
+        ]
+        cx = [ext_sum[k]["p95_latency_s"] for k, _ in cvar_keys if k in ext_sum]
+        cy = [ext_sum[k]["end_to_end_joint_accuracy"] * 100.0 for k, _ in cvar_keys if k in ext_sum]
+        ax.plot(cx, cy, linestyle="--", marker="^", markersize=6, linewidth=1.7, color="#DD8452", label="CVaR Cutoff Sweep ($B=1.5$--$30$s)")
+        pol_meta_rev = [
+            ("Fast_k_of_N", "Fast $k$-of-$N$", "#C44E52", "s", 85),
+            ("Tier_Weighted_Fast", "TW-Fast (Static Tier)", "#A0522D", "v", 85),
+            ("Entropy_Cascade", "Entropy-Cascade", "#17BECF", "D", 85),
+            ("Sync_N_of_N", "Sync $N$-of-$N$ Barrier", "#4C72B0", "o", 85),
+            ("Genealogy_Sync_HPR", "Genealogy Sync (HPR)", "#8172B2", "P", 105),
+            ("QuorumGuard", "QuorumGuard (Ours)", "#1B7837", "*", 210),
+        ]
+        for key, label, col, mk, sz in pol_meta_rev:
+            st = ext_sum[key]
+            x = st["p95_latency_s"]
+            y = st["end_to_end_joint_accuracy"] * 100.0
+            ax.scatter([x], [y], color=col, marker=mk, s=sz, zorder=5, label=f"{label} ({x:.1f}s, {y:.1f}%)")
+    else:
+        psum = pilot["policy_summary"]
+        pol_meta = [
+            ("Fast_k_of_N", "Fast $k$-of-$N$", "#C44E52", "s"),
+            ("CVaR_Static_Cutoff", "CVaR Static Cutoff", "#DD8452", "^"),
+            ("Sync_N_of_N", "Sync $N$-of-$N$ Barrier", "#4C72B0", "D"),
+            ("Genealogy_Sync_HPR", "Genealogy Sync (HPR)", "#8172B2", "P"),
+            ("QuorumGuard", "QuorumGuard (Ours)", "#1B7837", "*"),
+        ]
+        for key, label, col, mk in pol_meta:
+            st = psum[key]
+            x = st["p95_workflow_latency_s"]
+            y = st["end_to_end_joint_accuracy"] * 100.0
+            sz = 195 if key == "QuorumGuard" else 95
+            ax.scatter([x], [y], color=col, marker=mk, s=sz, zorder=4, label=f"{label} ({x:.1f}s, {y:.1f}%)")
+    ax.set_xlim(-1.0, 51.0)
+    ax.set_ylim(22.0, 78.0)
     ax.set_xlabel("End-to-End 2-Stage P95 Tail Latency (s) [Lower is Better]")
     ax.set_ylabel("Joint 2-Stage Workflow Accuracy (%)")
-    ax.set_title("Live Qwen2.5 MPS Benchmark: Tail Latency vs. Consensus Accuracy")
-    ax.legend(loc="lower right", frameon=True)
+    ax.set_title("QuorumBench-50: Tail Latency vs. Consensus Accuracy")
+    ax.legend(loc="center left", bbox_to_anchor=(0.015, 0.56), fontsize=7.3, frameon=True, framealpha=0.94)
     fig.tight_layout()
     fig.savefig(fig_dir / "fig3_pareto_latency_accuracy.pdf")
     fig.savefig(fig_dir / "fig3_pareto_latency_accuracy.png", dpi=220)
@@ -247,7 +297,7 @@ def main() -> None:
     plt.close(fig)
 
     # --- Figure 5: Orthogonal Component Ablation Breakdown ---
-    fig, ax1 = plt.subplots(figsize=(6.0, 3.6))
+    fig, ax1 = plt.subplots(figsize=(6.2, 3.6))
     abl_keys = [
         "1_Fast_k_of_N",
         "2_Entropy_Gate_Only",
@@ -257,20 +307,20 @@ def main() -> None:
     ]
     abl_labels = [
         "Fast\n$k$-of-$N$",
-        "+ Entropy\nGate Only",
+        "+ Entropy\nOnly",
         "+ Genealogy\n$N_{\\mathrm{eff}}$ Only",
-        "QuorumGuard\n(w/o Boost)",
-        "QuorumGuard\n(Full)",
+        "QG w/o\nBoost",
+        "QG\n(Full)",
     ]
     xp = np.arange(len(abl_keys))
     s1_accs = [abl[k]["stage1_accuracy"] * 100.0 for k in abl_keys]
     p95_lats = [abl[k]["p95_stage1_latency_s"] for k in abl_keys]
 
-    ax1.bar(xp - 0.18, s1_accs, 0.35, color="#1B7837", label="Stage-1 Accuracy (%)")
+    ax1.bar(xp - 0.17, s1_accs, 0.34, color="#1B7837", label="Stage-1 Accuracy (%)")
     ax1.set_ylabel("Stage-1 Consensus Accuracy (%)", color="#1B7837")
     ax1.set_ylim(0, 105)
     ax1.set_xticks(xp)
-    ax1.set_xticklabels(abl_labels)
+    ax1.set_xticklabels(abl_labels, fontsize=8.6)
 
     ax2 = ax1.twinx()
     ax2.plot(xp + 0.18, p95_lats, color="#C44E52", marker="o", linewidth=2.1, label="Stage-1 P95 Latency (s)")

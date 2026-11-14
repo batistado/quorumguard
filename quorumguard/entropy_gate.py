@@ -32,28 +32,39 @@ class EpistemicSignals:
 
 def compute_epistemic_weight(
     signals: EpistemicSignals,
-    margin_scale: float = 3.0,
-    unverified_shallow_discount: float = 0.84,
-    tool_verified_bonus: float = 1.25,
-    max_weight: float = 1.15,
+    margin_scale: float = 3.5,
+    seq_alpha: float = 0.12,
+    seq_threshold: float = 0.60,
+    unverified_shallow_discount: float = 0.76,
+    short_cot_mult: float = 0.85,
+    cot_mult: float = 1.12,
+    deep_unverified_mult: float = 1.18,
+    tool_verified_bonus: float = 1.38,
+    max_weight: float = 1.35,
+    min_weight: float = 0.05,
+    is_deep_verifier: bool = False,
+    is_short_cot: bool = False,
 ) -> float:
     """
-    Map raw logit/entropy & verification signals into calibrated vote weight w_i.
+    Map raw logit/entropy & verification signals into calibrated vote weight w_i
+    matching Eq. (10) in the QuorumGuard paper (default range [0.05, 1.35]).
     """
     norm_ent = signals.normalized_option_entropy
     ent_certainty = 1.0 - norm_ent
     margin_certainty = math.tanh(max(0.0, signals.logit_margin) / max(1e-6, margin_scale))
-    seq_penalty = 1.0 / (1.0 + 0.12 * max(0.0, signals.seq_token_entropy - 0.6))
+    seq_penalty = 1.0 / (1.0 + max(0.0, seq_alpha) * max(0.0, signals.seq_token_entropy - seq_threshold))
 
     base = (0.55 * ent_certainty + 0.45 * margin_certainty) * seq_penalty
     if signals.tool_verified:
         mult = tool_verified_bonus
+    elif is_deep_verifier:
+        mult = deep_unverified_mult
     elif signals.has_cot_trace:
-        mult = 1.00
+        mult = short_cot_mult if is_short_cot else cot_mult
     else:
         mult = unverified_shallow_discount
 
-    return min(max_weight, max(0.05, base * mult))
+    return min(max_weight, max(min_weight, base * mult))
 
 
 def posterior_entropy_and_margin_from_logits(logits: Sequence[float]) -> tuple[float, float, list[float]]:
