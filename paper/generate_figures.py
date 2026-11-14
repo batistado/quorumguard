@@ -95,6 +95,7 @@ def draw_architecture_overview(out_path: Path) -> None:
 
     fig.tight_layout(pad=0.2)
     fig.savefig(out_path)
+    fig.savefig(out_path.with_suffix(".png"), dpi=220)
     plt.close(fig)
 
 
@@ -140,6 +141,7 @@ def main() -> None:
     ax.legend(loc="upper right", frameon=True)
     fig.tight_layout()
     fig.savefig(fig_dir / "fig1_phase_transition.pdf")
+    fig.savefig(fig_dir / "fig1_phase_transition.png", dpi=220)
     plt.close(fig)
 
     # --- Figure 2: Theorem 2 Multi-Stage DAG Cascade Amplification ---
@@ -179,6 +181,7 @@ def main() -> None:
     ax.legend(loc="center right", frameon=True)
     fig.tight_layout()
     fig.savefig(fig_dir / "fig2_cascade_amplification.pdf")
+    fig.savefig(fig_dir / "fig2_cascade_amplification.png", dpi=220)
     plt.close(fig)
 
     # --- Figure 3: Live MPS 2-Stage Accuracy vs. P95 Latency Pareto Frontier ---
@@ -203,6 +206,7 @@ def main() -> None:
     ax.legend(loc="lower right", frameon=True)
     fig.tight_layout()
     fig.savefig(fig_dir / "fig3_pareto_latency_accuracy.pdf")
+    fig.savefig(fig_dir / "fig3_pareto_latency_accuracy.png", dpi=220)
     plt.close(fig)
 
     # --- Figure 4: Empirical Tier Latency-Accuracy Covariance & Pre-Commit Entropy ---
@@ -239,6 +243,7 @@ def main() -> None:
     ax1.set_title("Empirical Latency–Accuracy Covariance & Epistemic Entropy Across Tiers")
     fig.tight_layout()
     fig.savefig(fig_dir / "fig4_entropy_covariance_calibration.pdf")
+    fig.savefig(fig_dir / "fig4_entropy_covariance_calibration.png", dpi=220)
     plt.close(fig)
 
     # --- Figure 5: Orthogonal Component Ablation Breakdown ---
@@ -279,6 +284,7 @@ def main() -> None:
     ax1.set_title("QuorumGuard Component Ablation: Accuracy vs. P95 Tail Latency")
     fig.tight_layout()
     fig.savefig(fig_dir / "fig5_ablation_breakdown.pdf")
+    fig.savefig(fig_dir / "fig5_ablation_breakdown.png", dpi=220)
     plt.close(fig)
 
     # --- Figure 6: Physical MPS GPU Queue Contention Across Load rho ---
@@ -311,6 +317,7 @@ def main() -> None:
 
         fig.tight_layout()
         fig.savefig(fig_dir / "fig6_priority_contention.pdf")
+        fig.savefig(fig_dir / "fig6_priority_contention.png", dpi=220)
         plt.close(fig)
 
     print(f"Generated all vector PDF figures in {fig_dir}")
