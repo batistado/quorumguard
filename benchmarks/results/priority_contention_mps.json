@@ -1,0 +1,139 @@
+{
+  "hardware": "Apple M5 Pro MPS (FP16)",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "quantum_tokens": 8,
+  "measured_mps_quantum_mean_ms": 554.377,
+  "measured_mps_quantum_p95_ms": 694.504,
+  "measured_mps_prefill_mean_ms": 102.165,
+  "num_requests_per_load": 450,
+  "loads": {
+    "rho_0.58": {
+      "FCFS_Default": {
+        "dissent_straggler_mean_turnaround_s": 19.7831,
+        "dissent_straggler_p95_turnaround_s": 59.6784,
+        "dissent_straggler_cvar95_turnaround_s": 67.112,
+        "dissent_straggler_mean_queue_wait_s": 10.3492,
+        "foreground_normal_mean_turnaround_s": 12.2204,
+        "foreground_normal_p95_turnaround_s": 58.4369
+      },
+      "Unbounded_Urgent": {
+        "dissent_straggler_mean_turnaround_s": 20.1801,
+        "dissent_straggler_p95_turnaround_s": 43.2771,
+        "dissent_straggler_cvar95_turnaround_s": 93.5059,
+        "dissent_straggler_mean_queue_wait_s": 10.7462,
+        "foreground_normal_mean_turnaround_s": 10.4248,
+        "foreground_normal_p95_turnaround_s": 56.1936
+      },
+      "QuorumGuard_Budgeted": {
+        "dissent_straggler_mean_turnaround_s": 11.4692,
+        "dissent_straggler_p95_turnaround_s": 20.074,
+        "dissent_straggler_cvar95_turnaround_s": 24.6575,
+        "dissent_straggler_mean_queue_wait_s": 2.0352,
+        "foreground_normal_mean_turnaround_s": 15.4009,
+        "foreground_normal_p95_turnaround_s": 64.7391
+      },
+      "speedup_metrics": {
+        "p95_turnaround_speedup_x": 2.973,
+        "queue_wait_compression_x": 5.085,
+        "quorumguard_foreground_p95_overhead_pct": 10.78,
+        "unbounded_foreground_p95_starvation_pct": -3.84
+      }
+    },
+    "rho_0.72": {
+      "FCFS_Default": {
+        "dissent_straggler_mean_turnaround_s": 19.1578,
+        "dissent_straggler_p95_turnaround_s": 52.1793,
+        "dissent_straggler_cvar95_turnaround_s": 66.5439,
+        "dissent_straggler_mean_queue_wait_s": 10.0827,
+        "foreground_normal_mean_turnaround_s": 12.366,
+        "foreground_normal_p95_turnaround_s": 44.9872
+      },
+      "Unbounded_Urgent": {
+        "dissent_straggler_mean_turnaround_s": 22.2972,
+        "dissent_straggler_p95_turnaround_s": 76.5505,
+        "dissent_straggler_cvar95_turnaround_s": 115.5731,
+        "dissent_straggler_mean_queue_wait_s": 13.2221,
+        "foreground_normal_mean_turnaround_s": 10.7249,
+        "foreground_normal_p95_turnaround_s": 41.8258
+      },
+      "QuorumGuard_Budgeted": {
+        "dissent_straggler_mean_turnaround_s": 10.9822,
+        "dissent_straggler_p95_turnaround_s": 17.5301,
+        "dissent_straggler_cvar95_turnaround_s": 20.8139,
+        "dissent_straggler_mean_queue_wait_s": 1.9071,
+        "foreground_normal_mean_turnaround_s": 17.2678,
+        "foreground_normal_p95_turnaround_s": 74.7451
+      },
+      "speedup_metrics": {
+        "p95_turnaround_speedup_x": 2.977,
+        "queue_wait_compression_x": 5.287,
+        "quorumguard_foreground_p95_overhead_pct": 66.15,
+        "unbounded_foreground_p95_starvation_pct": -7.03
+      }
+    },
+    "rho_0.85": {
+      "FCFS_Default": {
+        "dissent_straggler_mean_turnaround_s": 22.9639,
+        "dissent_straggler_p95_turnaround_s": 53.4878,
+        "dissent_straggler_cvar95_turnaround_s": 58.9437,
+        "dissent_straggler_mean_queue_wait_s": 13.5243,
+        "foreground_normal_mean_turnaround_s": 14.2253,
+        "foreground_normal_p95_turnaround_s": 40.0221
+      },
+      "Unbounded_Urgent": {
+        "dissent_straggler_mean_turnaround_s": 23.6382,
+        "dissent_straggler_p95_turnaround_s": 86.5931,
+        "dissent_straggler_cvar95_turnaround_s": 101.347,
+        "dissent_straggler_mean_queue_wait_s": 14.1987,
+        "foreground_normal_mean_turnaround_s": 12.2374,
+        "foreground_normal_p95_turnaround_s": 49.8471
+      },
+      "QuorumGuard_Budgeted": {
+        "dissent_straggler_mean_turnaround_s": 12.5491,
+        "dissent_straggler_p95_turnaround_s": 28.7285,
+        "dissent_straggler_cvar95_turnaround_s": 30.4709,
+        "dissent_straggler_mean_queue_wait_s": 3.1096,
+        "foreground_normal_mean_turnaround_s": 18.8745,
+        "foreground_normal_p95_turnaround_s": 58.586
+      },
+      "speedup_metrics": {
+        "p95_turnaround_speedup_x": 1.862,
+        "queue_wait_compression_x": 4.349,
+        "quorumguard_foreground_p95_overhead_pct": 46.38,
+        "unbounded_foreground_p95_starvation_pct": 24.55
+      }
+    },
+    "rho_0.93": {
+      "FCFS_Default": {
+        "dissent_straggler_mean_turnaround_s": 26.3621,
+        "dissent_straggler_p95_turnaround_s": 56.5024,
+        "dissent_straggler_cvar95_turnaround_s": 61.812,
+        "dissent_straggler_mean_queue_wait_s": 16.7212,
+        "foreground_normal_mean_turnaround_s": 19.8393,
+        "foreground_normal_p95_turnaround_s": 46.9704
+      },
+      "Unbounded_Urgent": {
+        "dissent_straggler_mean_turnaround_s": 26.1454,
+        "dissent_straggler_p95_turnaround_s": 85.8615,
+        "dissent_straggler_cvar95_turnaround_s": 116.0282,
+        "dissent_straggler_mean_queue_wait_s": 16.5045,
+        "foreground_normal_mean_turnaround_s": 21.8514,
+        "foreground_normal_p95_turnaround_s": 93.2674
+      },
+      "QuorumGuard_Budgeted": {
+        "dissent_straggler_mean_turnaround_s": 12.4241,
+        "dissent_straggler_p95_turnaround_s": 21.395,
+        "dissent_straggler_cvar95_turnaround_s": 23.1681,
+        "dissent_straggler_mean_queue_wait_s": 2.7832,
+        "foreground_normal_mean_turnaround_s": 27.0203,
+        "foreground_normal_p95_turnaround_s": 68.1496
+      },
+      "speedup_metrics": {
+        "p95_turnaround_speedup_x": 2.641,
+        "queue_wait_compression_x": 6.008,
+        "quorumguard_foreground_p95_overhead_pct": 45.09,
+        "unbounded_foreground_p95_starvation_pct": 98.57
+      }
+    }
+  }
+}
