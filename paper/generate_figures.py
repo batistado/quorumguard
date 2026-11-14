@@ -219,7 +219,7 @@ def main() -> None:
         ]
         cx = [ext_sum[k]["p95_latency_s"] for k, _ in cvar_keys if k in ext_sum]
         cy = [ext_sum[k]["end_to_end_joint_accuracy"] * 100.0 for k, _ in cvar_keys if k in ext_sum]
-        ax.plot(cx, cy, linestyle="--", marker="^", markersize=6, linewidth=1.7, color="#DD8452", label="CVaR Cutoff Sweep ($B=1.5$--$30$s)")
+        ax.plot(cx, cy, linestyle="--", marker="^", markersize=6, linewidth=1.7, color="#DD8452", label="CVaR Cutoff Sweep ($B=1.5$\u2013$30$s)")
         pol_meta_rev = [
             ("Fast_k_of_N", "Fast $k$-of-$N$", "#C44E52", "s", 85),
             ("Tier_Weighted_Fast", "TW-Fast (Static Tier)", "#A0522D", "v", 85),
@@ -354,7 +354,7 @@ def main() -> None:
         ax_l.plot(rho_x, qg_w, marker="o", linewidth=2.2, color="#1B7837", label="QuorumGuard Budgeted")
         ax_l.set_xlabel("GPU Utilization $\\rho$")
         ax_l.set_ylabel("Mean Straggler Queue Wait (s)")
-        ax_l.set_title("(a) Queue-Wait Compression ($4.3\\times$--$6.0\\times$)")
+        ax_l.set_title("(a) Queue-Wait Compression (4.3\u00d7\u20136.0\u00d7)")
         ax_l.legend(loc="upper left", frameon=True)
 
         ax_r.plot(rho_x, unb_cvar, marker="^", linewidth=1.9, linestyle="--", color="#C44E52", label="Unbounded Urgent")
