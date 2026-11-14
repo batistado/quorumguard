@@ -9,7 +9,11 @@ description = "Claim-Genealogy-Gated Hedged Quorums and Priority-Budget Straggle
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-    { name = "Mohammed Kamran Syed", email = "syed.kamran@live.com" },
+    { name = "Mohammed Kamran Syed", email = "mohammedkamran.syed@ieee.org" },
+    { name = "Anudeep Rentala", email = "anudeep.rentala@ieee.org" },
+    { name = "Somesh Rahul", email = "someshrahul@ieee.org" },
+    { name = "Raghuram Malpe Pai", email = "raghuram.pai@ieee.org" },
+    { name = "Krishna Suman Dara", email = "krishna-suman.dara@ieee.org" },
 ]
 keywords = [
     "multi-agent-systems",

@@ -21,4 +21,3 @@ python3 validate_latex.py
   pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
   pdflatex highlights.tex
   ```
-* **Affiliation Toggle (`go/pubapprove` vs. Independent):** Set `\googleaffiltrue` or `\googleaffilfalse` at line 22 of `main.tex`.

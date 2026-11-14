@@ -24,9 +24,6 @@
 
 \graphicspath{{figures/}}
 
-\newif\ifgoogleaffil
-\googleaffiltrue
-
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{proposition}{Proposition}
@@ -97,17 +94,21 @@
 
 \title{QuorumGuard: Straggler-Induced Herding Bounds and Claim-Genealogy-Gated Hedged Quorums in Asynchronous Multi-Agent LLM Consensus}
 
-\author{Mohammed~Kamran~Syed%
-\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem
-\ifgoogleaffil
-M.~K.~Syed is with Google, Mountain View, CA, USA (e-mail: syed.kamran@live.com).
-\else
-M.~K.~Syed is an Independent Systems Researcher (e-mail: syed.kamran@live.com).
-\fi\protect\\
-Code and scheduler package: \url{https://github.com/batistado/quorumguard} and \url{https://huggingface.co/batistado/QuorumGuard}; \textup{\textsc{QuorumBench}} dataset: \url{https://huggingface.co/datasets/batistado/QuorumBench}; interactive explorer: \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer}.}}
+\author{Mohammed~Kamran~Syed,
+Anudeep~Rentala,
+Somesh~Rahul,
+Raghuram~Malpe~Pai,
+and~Krishna~Suman~Dara%
+\IEEEcompsocitemizethanks{%
+\IEEEcompsocthanksitem M.~K.~Syed (Corresponding \& Submitting Author) is an IEEE Independent Researcher, Mountain House, CA, USA (e-mail: mohammedkamran.syed@ieee.org; ORCID: 0009-0009-9058-5375).
+\IEEEcompsocthanksitem A.~Rentala is an IEEE Independent Researcher, Fremont, CA, USA (e-mail: anudeep.rentala@ieee.org).
+\IEEEcompsocthanksitem S.~Rahul is an IEEE Independent Researcher, Fremont, CA, USA (e-mail: someshrahul@ieee.org).
+\IEEEcompsocthanksitem R.~M.~Pai is an IEEE Independent Researcher, Sunnyvale, CA, USA (e-mail: raghuram.pai@ieee.org).
+\IEEEcompsocthanksitem K.~S.~Dara is an IEEE Independent Researcher, Sunnyvale, CA, USA (e-mail: krishna-suman.dara@ieee.org).
+\IEEEcompsocthanksitem Code and scheduler package: \url{https://github.com/batistado/quorumguard} and \url{https://huggingface.co/batistado/QuorumGuard}; \textup{\textsc{QuorumBench}} dataset: \url{https://huggingface.co/datasets/batistado/QuorumBench}; interactive explorer: \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer}.}}
 
 \markboth{SUBMITTED FOR ARCHIVAL PUBLICATION, NOVEMBER 2026}%
-{SYED: QUORUMGUARD: STRAGGLER-INDUCED HERDING BOUNDS AND CLAIM-GENEALOGY-GATED HEDGED QUORUMS}
+{SYED ET AL.: QUORUMGUARD: STRAGGLER-INDUCED HERDING BOUNDS AND CLAIM-GENEALOGY-GATED HEDGED QUORUMS}
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
@@ -516,7 +517,7 @@ To test Theorem~\ref{thm:optimality}(2) on measured GPU execution quanta, we pro
 Asynchronous $k$-of-$N$ fast quorums fail in multi-agent LLM committees because completion latency and epistemic accuracy covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$). Static fast quorums suffer an order-statistic false-consensus phase transition below $\phicrit$ that compounds across multi-stage workflow DAGs. \QG{} combines pre-commitment semantic entropy gating, provenance-DAG effective quorum sizing ($\Neff$), and token-bucket GPU priority dissent preemption. Across $30$-workflow and $50$-workflow two-stage benchmarks on \texttt{Qwen2.5-3B}, \texttt{7B}, and \texttt{14B-Coder} with live Python sandboxes, \QG{} matches synchronous genealogy-weighted accuracy ($+40.0$--$44.0$ percentage points over fast quorums) while reducing $\mathrm{P95}$ and $\CVaR_{0.95}$ tail latency by $3.19\times$--$3.67\times$.
 
 \section*{Code and Data Availability}
-Source code, scheduler modules, and the \QBench{} v1.0 dataset~\cite{syed2026quorumbench} are available under Apache~2.0 at \url{https://github.com/batistado/quorumguard}, \url{https://huggingface.co/batistado/QuorumGuard}, \url{https://huggingface.co/datasets/batistado/QuorumBench}, and \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer}. The author declares no competing financial interests.
+Source code, scheduler modules, and the \QBench{} v1.0 dataset~\cite{syed2026quorumbench} are available under Apache~2.0 at \url{https://github.com/batistado/quorumguard}, \url{https://huggingface.co/batistado/QuorumGuard}, \url{https://huggingface.co/datasets/batistado/QuorumBench}, and \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer}. The authors declare no competing financial interests.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

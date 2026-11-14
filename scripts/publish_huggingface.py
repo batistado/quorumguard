@@ -229,7 +229,7 @@ Benchmark tasks and live Apple M5 Pro (`MPS` FP16) telemetry for **[QuorumGuard]
 
 ```bibtex
 @misc{{syed2026quorumbench,
-  author       = {{Syed, Mohammed Kamran}},
+  author       = {{Syed, Mohammed Kamran and Rentala, Anudeep and Rahul, Somesh and Pai, Raghuram Malpe and Dara, Krishna Suman}},
   title        = {{{{QuorumBench}}: Asynchronous Multi-Agent {{LLM}} Consensus and Straggler Herding Benchmark}},
   year         = {{2026}},
   howpublished = {{\\url{{https://huggingface.co/datasets/{username}/QuorumBench}}}}
