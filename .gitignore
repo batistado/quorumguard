@@ -38,3 +38,4 @@ raw_traces/
 *.out
 *.synctex.gz
 *.toc
+HANDOFF_CONTEXT.md
