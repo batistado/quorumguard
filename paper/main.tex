@@ -1,11 +1,6 @@
-\documentclass[10pt,journal,compsoc]{IEEEtran}
+\documentclass[conference]{IEEEtran}
 
-\ifCLASSOPTIONcompsoc
-  \usepackage[nocompress]{cite}
-\else
-  \usepackage{cite}
-\fi
-
+\usepackage{cite}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
@@ -23,6 +18,11 @@
 }
 
 \graphicspath{{figures/}}
+\setlength{\textfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{1pt}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -92,77 +92,49 @@
 
 \begin{document}
 
-\title{QuorumGuard: Straggler-Induced Herding Bounds and Claim-Genealogy-Gated Hedged Quorums in Asynchronous Multi-Agent LLM Consensus}
+\title{QuorumGuard: Architecture, Verification, and Governance for Asynchronous Multi-Agent Consensus in Autonomous Systems}
 
-\author{Mohammed~Kamran~Syed,
-Anudeep~Rentala,
-Somesh~Rahul,
-Raghuram~Malpe~Pai,
-and~Krishna~Suman~Dara%
-\IEEEcompsocitemizethanks{%
-\IEEEcompsocthanksitem M.~K.~Syed (Corresponding \& Submitting Author) is an IEEE Independent Researcher, Mountain House, CA, USA (e-mail: mohammedkamran.syed@ieee.org; ORCID: 0009-0009-9058-5375).
-\IEEEcompsocthanksitem A.~Rentala is an IEEE Independent Researcher, Fremont, CA, USA (e-mail: anudeep.rentala@ieee.org).
-\IEEEcompsocthanksitem S.~Rahul is an IEEE Independent Researcher, Fremont, CA, USA (e-mail: someshrahul@ieee.org).
-\IEEEcompsocthanksitem R.~M.~Pai is an IEEE Independent Researcher, Sunnyvale, CA, USA (e-mail: raghuram.pai@ieee.org).
-\IEEEcompsocthanksitem K.~S.~Dara is an IEEE Independent Researcher, Sunnyvale, CA, USA (e-mail: krishna-suman.dara@ieee.org).
-\IEEEcompsocthanksitem Code and scheduler package: \url{https://github.com/batistado/quorumguard} and \url{https://huggingface.co/batistado/QuorumGuard}; \textup{\textsc{QuorumBench}} dataset: \url{https://huggingface.co/datasets/batistado/QuorumBench}; interactive explorer: \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer}.}}
+\author{\IEEEauthorblockN{Mohammed Kamran Syed\textsuperscript{1}, Anudeep Rentala\textsuperscript{2}, Somesh Rahul\textsuperscript{2},\\ Raghuram Malpe Pai\textsuperscript{3}, and Krishna Suman Dara\textsuperscript{3}}
+\IEEEauthorblockA{\small\textsuperscript{1}IEEE Independent Researcher, Mountain House, CA, USA (mohammedkamran.syed@ieee.org; ORCID: 0009-0009-9058-5375)\\
+\textsuperscript{2}IEEE Independent Researcher, Fremont, CA, USA (\{anudeep.rentala, someshrahul\}@ieee.org)\\
+\textsuperscript{3}IEEE Independent Researcher, Sunnyvale, CA, USA (\{raghuram.pai, krishna-suman.dara\}@ieee.org)}}
 
-\markboth{SUBMITTED FOR ARCHIVAL PUBLICATION, NOVEMBER 2026}%
-{SYED ET AL.: QUORUMGUARD: STRAGGLER-INDUCED HERDING BOUNDS AND CLAIM-GENEALOGY-GATED HEDGED QUORUMS}
+\maketitle
 
-\IEEEtitleabstractindextext{%
 \begin{abstract}
-Multi-agent Large Language Model (LLM) workflows run parallel committees of reasoning and tool-using agents across multi-stage directed acyclic graphs (DAGs) for code verification, numerical auditing, and incident diagnosis. Waiting for synchronous $N$-of-$N$ barriers inflates $\mathrm{P95}$ and $\mathrm{P99}$ latency because container startups, sandboxed tool calls, and long Chain-of-Thought (CoT) traces produce heavy-tailed completion times. Borrowing from replicated storage, orchestrators apply asynchronous $k$-of-$N$ fast quorums that commit on the earliest $k$ agreements and cancel stragglers. In heterogeneous LLM pools, however, completion time $T_i$ and accuracy $1 - \varepsilon_i$ covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$): zero-CoT guesses and shared echoes arrive first, while multi-step derivations and code-execution checks arrive in the tail. We prove for general $|\mathcal{C}| \ge 2$ options (Theorem~1) that even when full-pool error is low, static $k$-of-$N$ quorums cross a critical ratio $\phicrit(\theta)$ below which false consensus converges to probability $1$ as $N \to \infty$ and amplifies across $M$-stage DAGs (Theorem~2).
-
-We present \QG{}, an event-driven consensus gate and quantum-preemptive scheduler built on three mechanisms: (1)~pre-commitment semantic entropy gating ($\Hans, \Delta$), avoiding a $70\times$ post-generation self-conditioning collapse; (2)~provenance-DAG quorum sizing ($\Neff$), collapsing correlated echoes to at most one root; and (3)~token-bucket priority dissent boosting, elevating in-flight deep verifiers ($\mathrm{Priority} = -10$) at 8-token decode quanta with exact three-path risk and two-class preemptive-resume M/G/1 bounds (Theorem~3). We evaluate a PyTorch/\texttt{transformers} Apple M5 Pro ($48~\mathrm{GB}$) MPS prototype using sequential tier isolation ($\le 28.5~\mathrm{GB}$ peak) across \texttt{Qwen2.5-3B/7B/14B-Coder}, cross-family \texttt{SmolLM2-1.7B} + \texttt{Granite-3.1-8B}, \QBench{}, external \textsc{CRUXEval-50}, a $450$-request quantum simulator, and a live concurrent KV-cache MPS server. \QG{} raises \QBench{} joint accuracy by $+44.0$ percentage points ($72.0\%$ vs.\ $28.0\%$ for fast quorums and $2.8\text{s}$ $\CVaR$) and beats unweighted barriers by $+30.0$ points ($+30.0$--$40.0$ points over fast quorums on \textsc{CRUXEval-50}), cuts $\mathrm{P95}$ latency by $3.14\times$--$3.67\times$, and compresses live MPS server straggler queue waits by $11.74\times$.
+Autonomous network and distributed systems increasingly orchestrate multi-stage Large Language Model (LLM) agent committees for incident diagnosis, telemetry auditing, and code verification. Waiting for synchronous $N$-of-$N$ barriers inflates $\mathrm{P95}$ latency, whereas classical $k$-of-$N$ fast quorums fail because agent completion time $T_i$ and correctness $1 - \varepsilon_i$ covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$): zero-CoT guesses and shared echoes arrive first, while verified checks arrive in the tail. We prove for $|\mathcal{C}| \ge 2$ options (Theorem~1) that static $k$-of-$N$ quorums cross a critical ratio $\phicrit(\theta)$ below which false consensus converges to probability $1$ as $N \to \infty$ and compounds across $M$-stage DAGs (Theorem~2). We present \QG{}, integrating: (1)~pre-commitment semantic entropy verification ($\Hans, \Delta$), avoiding a $70\times$ post-generation collapse; (2)~provenance-DAG quorum governance ($\Neff$), deduplicating correlated echoes; and (3)~token-bucket priority dissent boosting ($\mathrm{Priority} = -10$ at 8-token quanta) with three-path risk and preemptive-resume M/G/1 bounds (Theorem~3). Validated on an Apple M5 Pro ($48~\mathrm{GB}$) PyTorch MPS prototype ($\le 28.5~\mathrm{GB}$ sequential tier isolation) across \texttt{Qwen2.5-3B/7B/14B-Coder}, cross-family \texttt{SmolLM2-1.7B}+\texttt{Granite-3.1-8B}, \QBench{}, \textsc{CRUXEval-50}, a $450$-request quantum simulator, and a live concurrent KV-cache server, \QG{} improves \QBench{} joint accuracy by $+44.0$ points ($72.0\%$ vs.\ $28.0\%$) and \textsc{CRUXEval-50} by $+30.0$--$40.0$ points, cuts $\mathrm{P95}$ latency by $3.14\times$--$3.67\times$, and compresses live server straggler waits by $11.74\times$.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Multi-agent LLM consensus, asynchronous quorums, tail latency, straggler mitigation, epistemic herding, error cascades, claim genealogy, semantic entropy, GPU priority scheduling.
-\end{IEEEkeywords}}
-
-\maketitle
-\IEEEdisplaynontitleabstractindextext
-\IEEEpeerreviewmaketitle
+Agentic AI, autonomous network systems, multi-agent verification, consensus governance, tail latency, claim genealogy, semantic entropy, priority scheduling.
+\end{IEEEkeywords}
 
 % ============================================================================
-\IEEEraisesectionheading{\section{Introduction}\label{sec:intro}}
+\section{Introduction}\label{sec:intro}
 % ============================================================================
 
-\IEEEPARstart{M}{ulti-agent} Large Language Model (LLM) systems execute parallel committees of specialized agents across multi-stage workflow Directed Acyclic Graphs (DAGs)~\cite{du2024debate,chen2024reconcile,zheng2024sglang,cemri2025mast}. In code review, numerical validation, and database query auditing, an upstream stage launches $N$ agents combining lightweight triage models, Chain-of-Thought (CoT) reasoners, and sandboxed code verifiers, then passes its committed output to a downstream synthesis or deployment stage~\cite{jain2025livecodebench,luo2025autellix}.
-
-Synchronizing all $N$ agents at a barrier exposes every workflow stage to the slowest straggler $T_{(N)} = \max_{1 \le i \le N} T_i$~\cite{dean2013tail}. Because CoT trace lengths, subprocess sandboxes, and multi-tenant GPU queues are heavy-tailed, full barriers increase $\mathrm{P95}$ latency by $4\times$--$8\times$ over median single-agent execution and spend $40\%$--$60\%$ of GPU tokens on routine steps where lightweight models already agree~\cite{fu2024dynasor,feng2026readiness}. Distributed storage systems such as Fast Paxos~\cite{lamport2006fastpaxos}, Dynamo~\cite{decandia2007dynamo}, Cassandra~\cite{lakshman2010cassandra}, Raft~\cite{ongaro2014raft}, and redundancy-$d$ queues~\cite{gardner2015redundancy,shah2016redundant} avoid this tail penalty through asynchronous $k$-of-$N$ fast quorums that commit once the earliest $k < N$ replicas concur and cancel slower tasks.
+Autonomous network and distributed systems deploy parallel committees of Large Language Model (LLM) agents across multi-stage workflow Directed Acyclic Graphs (DAGs) for root-cause diagnosis, configuration auditing, and code verification~\cite{du2024debate,chen2024reconcile,zheng2024sglang,cemri2025mast,jain2025livecodebench,luo2025autellix}. Waiting for all $N$ agents at a synchronous barrier exposes every stage to the slowest straggler $T_{(N)} = \max_{1 \le i \le N} T_i$~\cite{dean2013tail}, inflating $\mathrm{P95}$ latency by $4\times$--$8\times$ and wasting $40\%$--$60\%$ of decode compute on routine decisions~\cite{fu2024dynasor,feng2026readiness}. Classical distributed protocols~\cite{lamport2006fastpaxos,decandia2007dynamo,lakshman2010cassandra,ongaro2014raft,gardner2015redundancy,shah2016redundant} avoid this tail penalty via asynchronous $k$-of-$N$ fast quorums that commit on the earliest $k < N$ agreements and cancel remaining workers.
 
 \begin{figure*}[!t]
   \centering
-  \includegraphics[width=0.98\textwidth]{fig0_architecture.pdf}
-  \caption{\QG{} overview. Fast shallow agents ($0.4\text{s}$--$0.9\text{s}$) return early but exhibit shared triage echoes ($r_0$) and boundary-trap errors, while tool-verified \texttt{14B-Coder} agents ($10\text{s}$--$19\text{s}$) arrive in the tail. \QG{} gates early closure using (1)~pre-commitment 4-option posterior entropy $\Hans$ and logit margin $\Delta$, (2)~provenance-DAG effective quorum support $\Neff(t, c; G)$, and (3)~token-bucket decode priority preemption ($\mathrm{Priority}=-10$) for active deep stragglers when early arrivals dissent or fail gating.}
+  \includegraphics[width=0.70\textwidth]{fig0_architecture.pdf}
+  \caption{\QG{} architecture, verification, and governance overview. Fast shallow agents ($0.4\text{s}$--$0.9\text{s}$) arrive early with shared echoes ($r_0$) and boundary-trap errors, while tool-verified \texttt{14B-Coder} agents ($10\text{s}$--$19\text{s}$) arrive in the tail. \QG{} governs early closure via (1)~pre-commitment 4-option entropy $\Hans$ and logit margin $\Delta$, (2)~provenance-DAG support $\Neff(t, c; G)$, and (3)~token-bucket decode preemption ($\mathrm{Priority}=-10$) for deep stragglers.}
   \label{fig:arch}
 \end{figure*}
 
-\subsection{Failure of Latency--Correctness Independence}
-Classical fast-quorum guarantees assume that replica completion time $T_i$ and response correctness $1 - \varepsilon_i$ are statistically independent ($\Cov(T_i, 1 - \varepsilon_i) = 0$). A storage replica delayed by a network retransmission or garbage-collection pause holds the same data distribution as a fast replica.
-
-In heterogeneous and tool-using LLM pools, completion latency and accuracy covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$). Consider task \texttt{T01\_uint16\_overflow} from \QBench{}~\cite{syed2026quorumbench}, which asks for the value stored in \texttt{uint16\_t total\_tokens = batch\_size * seq\_len} in C/CUDA when both inputs equal $256$:
-\begin{enumerate}
-  \item \emph{Early arrivals ($0.5\text{s}$--$0.9\text{s}$):} Zero-CoT \texttt{Qwen2.5-3B} scanners and triage agents reading a shared static-lint note ($256 \times 256 = 65{,}536$) finish under one second and vote \texttt{65536}.
-  \item \emph{Verification stragglers ($6.8\text{s}$--$14.3\text{s}$):} A \texttt{Qwen2.5-7B} CoT reviewer and \texttt{Qwen2.5-Coder-14B} agents executing \texttt{np.uint16(256) * np.uint16(256)} in a Python subprocess take longer because they run multi-step checks, finding modulo-$2^{16}$ wraparound to \texttt{0}.
-\end{enumerate}
-Under a static $3$-of-$7$ fast quorum, the stage commits \texttt{65536} at $t = 0.68\text{s}$, cancels the running sandbox verifiers, and passes an authoritative consensus record to Stage~2, where downstream agents approve the unpatched kernel.
-
-Prior work addresses either tail scheduling or synchronous error cascades in isolation. Tail-aware agentic schedulers, including readiness--release decoupling for $\CVaR$ latency~\cite{feng2026readiness}, \textsc{Autellix}~\cite{luo2025autellix}, and \textsc{Dynasor}~\cite{fu2024dynasor}, schedule threads or apply deadline cutoffs while assuming early release leaves multi-agent consensus accuracy unchanged. Conversely, studies of multi-agent failure traces (\textsc{MAST}~\cite{cemri2025mast}), claim-genealogy cascades (\emph{From Spark to Fire}~\cite{xie2026sparktofire}), hallucination diffusion (\textsc{HPR-Adaptive}~\cite{hpr2026collective}), and epistemic herding~\cite{herding2026cascades} assume synchronous round barriers where all $N$ agents finish before aggregation, paying full straggler latency on every turn.
+In heterogeneous agentic systems, however, replica completion time $T_i$ and response correctness $1 - \varepsilon_i$ covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$). On task \texttt{T01\_uint16\_overflow} from \QBench{}~\cite{syed2026quorumbench} (\texttt{uint16\_t total\_tokens = batch\_size * seq\_len} for $256 \times 256$), zero-CoT \texttt{Qwen2.5-3B} agents reading a shared lint note finish in $0.5\text{s}$--$0.9\text{s}$ and vote \texttt{65536}, whereas \texttt{Qwen2.5-7B} CoT and \texttt{14B-Coder} Python-sandbox verifiers take $6.8\text{s}$--$14.3\text{s}$ to execute \texttt{np.uint16(256) * np.uint16(256)} and uncover modulo-$2^{16}$ wraparound to \texttt{0}. Under a static $3$-of-$7$ fast quorum, the stage commits \texttt{65536} at $t = 0.68\text{s}$, cancels all sandbox checks, and propagates an unpatched fault into Stage~2.
 
 \subsection{Contributions}
-\QG{} couples online epistemic quorum gating with GPU priority preemption (Fig.~\ref{fig:arch}):
+Aligned with agentic architecture, verification, and governance, \QG{} contributes (Fig.~\ref{fig:arch}):
 \begin{enumerate}
-  \item \emph{Phase-transition and DAG cascade bounds (\S\ref{sec:theory}):} Lemma~\ref{lem:finite_n} derives exact finite-$N$ order-statistic error via Beta functions, and Theorem~\ref{thm:phase} proves for $|\mathcal{C}| \ge 2$ options that under $\Cov(T_i, 1 - \varepsilon_i) > 0$, static $k$-of-$N$ fast quorums converge to false consensus with probability $1$ below $\phicrit(\theta)$, even as synchronous plurality error decays to $0$. Theorem~\ref{thm:cascade} distinguishes Stage-$M$ marginal error $q_M$ from joint survival $(1 - e_{\mathrm{stage}})^M$.
-  \item \emph{Pre-commitment entropy and provenance-DAG gating (\S\ref{sec:design}):} We show post-generation probing collapses normalized option entropy by $70\times$ ($0.003$ vs.\ $0.211$), and pair single-pass pre-commitment probing ($\Hans, \Delta$) with clone-invariant provenance-DAG support $\Neff(t, c; G)$ (Proposition~\ref{prop:clone}).
-  \item \emph{Token-bucket priority dissent boosting (\S\ref{sec:scheduler}):} When early arrivals share lineage, split votes, or show high entropy, \QG{} holds completion and elevates in-flight verifiers ($\mathrm{Priority} = -10$) at 8-token decode quanta under a token bucket ($B_{\max}=6.0, r_{\mathrm{refill}}=0.32/\text{req}$), with exact three-path risk and preemptive-resume M/G/1 delay bounds (Theorem~\ref{thm:optimality}).
-  \item \emph{PyTorch MPS, external \textup{\textsc{CRUXEval}}, and live server evaluation (\S\ref{sec:setup}--\S\ref{sec:eval}):} Across Apple M5 Pro MPS suites on \texttt{Qwen2.5-3B/7B/14B-Coder}, cross-family \texttt{SmolLM2-1.7B} + \texttt{Granite-3.1-8B}, canonical \textsc{CRUXEval-50}~\cite{gu2024cruxeval}, a $450$-request quantum simulator, and a live concurrent KV-cache MPS server, \QG{} raises \QBench{} joint accuracy by $+44.0$ percentage points ($72.0\%$ vs.\ $28.0\%$ for fast quorums and $2.8\text{s}$ $\CVaR$) and cuts $\mathrm{P95}$ latency by $3.14\times$ over genealogy barriers.
+  \item \emph{Theoretical framework (\S\ref{sec:theory}):} Exact finite-$N$ order-statistic error (Lemma~\ref{lem:finite_n}), phase-transition impossibility below $\phicrit(\theta)$ for $|\mathcal{C}| \ge 2$ options (Theorem~\ref{thm:phase}), and DAG marginal vs.\ joint survival bounds (Theorem~\ref{thm:cascade}).
+  \item \emph{Verification and governance (\S\ref{sec:design}):} Pre-commitment entropy probing ($\Hans, \Delta$) avoiding $70\times$ self-conditioning collapse, paired with clone-invariant provenance sizing $\Neff$ (Proposition~\ref{prop:clone}) and sandbox execution ($\xi_i$).
+  \item \emph{Bounded priority dissent architecture (\S\ref{sec:scheduler}):} Token-bucket priority boosting ($B_{\max}=6.0, r_{\mathrm{refill}}=0.32/\text{req}$, $\mathrm{Priority} = -10$) with three-path risk and two-class preemptive-resume M/G/1 delay bounds (Theorem~\ref{thm:optimality}).
+  \item \emph{Cross-family and live validation (\S\ref{sec:setup}--\S\ref{sec:eval}):} Evaluation across \texttt{Qwen2.5-3B/7B/14B-Coder}, \texttt{SmolLM2-1.7B}+\texttt{Granite-3.1-8B}, \QBench{}, \textsc{CRUXEval-50}~\cite{gu2024cruxeval}, quantum simulation, and a live concurrent KV-cache server ($+44.0$ accuracy points, $3.14\times$--$3.67\times$ $\mathrm{P95}$ speedup).
 \end{enumerate}
 
 % ============================================================================
-\section{Background and Related Work}\label{sec:related}
+\section{Background and Literature Review}\label{sec:related}
 % ============================================================================
 
 Table~\ref{tab:novelty} compares \QG{} with classical quorum protocols, LLM workflow schedulers, and synchronous cascade defenses.
@@ -198,7 +170,7 @@ Herding \& Runaway Cascades~\cite{herding2026cascades} & No ($N$-of-$N$ Sync) & 
 \emph{Multi-Agent Consensus and Cascades:} Self-Consistency~\cite{wang2023selfconsistency}, Debate~\cite{du2024debate,liang2024divergent}, and \textsc{ReConcile}~\cite{chen2024reconcile} aggregate synchronous agent answers, while \textsc{MAST}~\cite{cemri2025mast} cataloged correlated reasoning and verification failures across $1{,}600+$ traces. Recent 2026 defenses model claim-genealogy amplification (\emph{From Spark to Fire}~\cite{xie2026sparktofire}), topological hallucination diffusion (\textsc{HPR-Adaptive}~\cite{hpr2026collective}), and inter-round epistemic herding~\cite{herding2026cascades}, all assuming synchronous $N$-of-$N$ round completion.
 
 % ============================================================================
-\section{System Model and Impossibility Bounds}\label{sec:theory}
+\section{Theoretical Framework}\label{sec:theory}
 % ============================================================================
 
 \begin{definition}[Asynchronous Epistemic Quorum Stage]\label{def:stage}
@@ -271,11 +243,11 @@ Conditioning on Stage~$m-1$ gives $q_m = q_{m-1}[\betaherd + (1 - \betaherd)e_{\
 
 \begin{figure*}[!t]
   \centering
-  \begin{minipage}[t]{0.475\textwidth}
+  \begin{minipage}[t]{0.375\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig1_phase_transition.pdf}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.475\textwidth}
+  \begin{minipage}[t]{0.375\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig2_cascade_amplification.pdf}
   \end{minipage}
@@ -284,10 +256,10 @@ Conditioning on Stage~$m-1$ gives $q_m = q_{m-1}[\betaherd + (1 - \betaherd)e_{\
 \end{figure*}
 
 % ============================================================================
-\section{The \QG{} Architecture and Protocol}\label{sec:design}
+\section{\QG{} Architecture, Verification, and Governance}\label{sec:design}
 % ============================================================================
 
-\subsection{Pre-Commitment Semantic Entropy Gate}\label{sec:pillar1}
+\subsection{Verification: Pre-Commitment Semantic Entropy Gate}\label{sec:pillar1}
 Measuring option uncertainty in autoregressive agents requires probing logits before an answer token is generated. If a model first emits text such as \texttt{"A) 65536"} and an orchestrator then appends \texttt{"Final Answer (A/B/C/D):"} to inspect option log-probabilities, $\Prob(Y_i \mid \text{prompt}, \text{emitted\_letter})$ collapses to $\approx 1.0$ ($\Hans < 0.003~\mathrm{nats}$) because the model copies its own prior token. On \texttt{Qwen2.5-3B}, post-generation probing understated normalized option entropy by $70\times$ ($0.003$ vs.\ $0.211$).
 
 \QG{} uses pre-commitment hypothesis probing:
@@ -302,7 +274,7 @@ Letting $p_{i,c} = \exp(z_{i,c}) / \sum_{c' \in \mathcal{C}} \exp(z_{i,c'})$, no
 \end{align}
 where $\bar{H}_{\mathrm{seq}}(i)$ is mean reasoning-token entropy, with default calibration $\tau_\Delta = 3.5$, $\alpha_{\mathrm{seq}} = 0.12$, and $h_0 = 0.60$. The grounding multiplier $\psi_i = \psi(\mathrm{tier}_i, \xi_i)$ takes values $0.76$ (unverified zero-CoT), $0.85$ (short-CoT), $1.12$ (medium-CoT), $1.18$ (deep unverified CoT), and $1.38$ (sandbox-verified, $\xi_i = 1$), with $w_i$ clamped to $[0.05, 1.35]$.
 
-\subsection{Claim-Genealogy Effective Quorum Support (\texorpdfstring{$\Neff$}{Neff})}\label{sec:pillar2}
+\subsection{Governance: Claim-Genealogy Effective Quorum Support (\texorpdfstring{$\Neff$}{Neff})}\label{sec:pillar2}
 Confidence gating alone fails when multiple fast agents read the same misleading upstream summary with low entropy. \QG{} tracks a provenance DAG $G = (V, E)$ whose source nodes $\mathcal{R}_0 = \{u \in V : \deg^-(u) = 0\}$ represent independent inputs, independent reasoning chains, or isolated sandboxes, and whose edges record context consumption.
 
 Each completed agent $i \in \mathcal{A}(t) = \{j : T_j \le t\}$ maps to its ancestor root set $\mathcal{R}(i) \subseteq \mathcal{R}_0$. The genealogy-deduplicated support for claim $c \in \mathcal{C}$ at time $t$ is:
@@ -321,8 +293,8 @@ When agents $1, \dots, M$ trace only to $r_0$, $|\mathcal{R}(m)| = 1$ and~\eqref
 
 \begin{figure}[!t]
 \centering
-\footnotesize
-\renewcommand{\arraystretch}{1.10}
+\scriptsize
+\renewcommand{\arraystretch}{1.04}
 \begin{tabular}{|p{0.94\columnwidth}|}
 \hline
 \textbf{Algorithm 1:} \QG{} Consensus Gate and Dissent Preemption \\
@@ -347,7 +319,7 @@ When agents $1, \dots, M$ trace only to $r_0$, $|\mathcal{R}(m)| = 1$ and~\eqref
 \caption{\QG{} adaptive consensus stopping and priority-budget dissent preemption.}\label{fig:alg1}
 \end{figure}
 
-\subsection{Token-Bucket Priority Dissent Boosting}\label{sec:scheduler}
+\subsection{Architecture: Token-Bucket Priority Dissent Boosting}\label{sec:scheduler}
 Algorithm~1 (Fig.~\ref{fig:alg1}) launches all $N$ agents at normal serving priority ($\mathrm{Priority} = 0$) with default consensus thresholds $k_{\min} = 3$, $\tau_{\mathrm{eff}} = 2.12$, $\gamma_H = 0.08$, $\Delta_{\min} = 3.2$, and $m_{\mathrm{gap}} = 0.72$. On routine steps where $k_{\min}$ independent roots agree with $\bar{H}_{c_1} \le \gamma_H$ and $\Delta_{c_1}^{\min} \ge \Delta_{\min}$, $\mathrm{CleanFast}$ commits in $0.7\text{s}$--$1.8\text{s}$ and cancels remaining stragglers. If $k_{\min}$ raw agents finish without passing $\mathrm{CleanFast}$ due to shared roots, split votes, or elevated entropy, Lines~10--12 acquire up to $B_{\mathrm{stage}} = 2$ tokens from a \texttt{PriorityBudgetPool} $\mathcal{B}$ (capacity $B_{\max} = 6.0$, refill rate $r_{\mathrm{refill}} = 0.64$/stage, or $0.32$/request in single-stage queues) and raise in-flight verifiers to decode $\mathrm{Priority} = -10$ at 8-token quantum boundaries, matching \texttt{vLLM}-style priority preemption semantics while implemented directly in our live MPS server (\S\ref{sec:eval}). Once boosted verifiers satisfy $\mathrm{VerifiedHedge}$ (Line~7), the stage commits immediately without waiting for $T_{(N)}$.
 
 \begin{theorem}[Three-Path Risk and Preemptive-Resume M/G/1 Bounds]\label{thm:optimality}
@@ -371,20 +343,13 @@ By Proposition~\ref{prop:clone}, $M$ echoes of $r_0$ have $K_{\mathrm{root}} = 1
 \end{proof}
 
 % ============================================================================
-\section{Experimental Setup}\label{sec:setup}
+\section{Validation Methodology}\label{sec:setup}
 % ============================================================================
 
-All workflow evaluations ran on an Apple M5 Pro workstation ($48~\mathrm{GB}$ unified memory, $\mathrm{FP16}$ Metal MPS, PyTorch~2.15.0, \texttt{transformers}~5.22.1) with \texttt{torch.mps.synchronize()} timing barriers. Because FP16 weights of \texttt{Qwen2.5-3B} ($6.2~\mathrm{GB}$), \texttt{7B} ($15.2~\mathrm{GB}$), and \texttt{14B-Coder} ($28.5~\mathrm{GB}$) would approach $48~\mathrm{GB}$ if co-resident, multi-tier committees run as sequential single-tier passes separated by \texttt{torch.mps.empty\_cache()}, capping peak GPU footprint at $28.5~\mathrm{GB}$ (zero memory swapping), alongside a live concurrent multi-KV-cache MPS server (\texttt{Qwen2.5-7B}, $15.50~\mathrm{GB}$ peak) in \S\ref{sec:eval}. We evaluate four suites:
-\begin{enumerate}
-  \item \emph{\textup{\textsc{QuorumBench}} 2-tier (\textup{\texttt{Qwen2.5-3B}} + \textup{\texttt{7B}}, $30$ workflows):} Stage~1 ($N_1 = 7$) runs $3$ zero-CoT \texttt{3B} agents~\cite{yang2024qwen25} ($2$ sharing triage root $r_0$, $1$ independent $r_1$), $1$ short-CoT \texttt{3B} ($r_2$), $1$ \texttt{7B} CoT ($r_3$), and $2$ \texttt{7B} Python-sandbox verifiers ($r_4, r_5$). Stage~2 ($N_2 = 5$) runs $3$ fast \texttt{3B} coordinators ($2$ echoing Stage~1, $1$ independent) and $2$ \texttt{7B} auditors.
-  \item \emph{\textup{\QBench{}} 3-tier (\textup{\texttt{3B+7B+14B-Coder}}, $50$ workflows):} Replaces Stage-1 sandbox verifiers and Stage-2 auditors with 48-layer \texttt{Qwen2.5-Coder-14B-Instruct}~\cite{hui2024qwen25coder} ($\sim 28.5~\mathrm{GB}$ $\mathrm{FP16}$).
-  \item \emph{External \textup{\textsc{CRUXEval-50}}~\cite{gu2024cruxeval}:} $50$ canonical Python functions pairing input/output reasoning (Stage~1) with assertion synthesis (Stage~2), run on \texttt{Qwen2.5-3B+7B} and cross-family non-Qwen models.
-  \item \emph{Cross-family non-Qwen pool ($30$ workflows):} Replaces Qwen models with \texttt{SmolLM2-1.7B-Instruct}~\cite{allal2025smollm2} ($3.42~\mathrm{GB}$) as fast tier and \texttt{Granite-3.1-8B-Instruct}~\cite{granite2024team} ($16.34~\mathrm{GB}$) as deep/sandbox tier on both \QBench{} and \textsc{CRUXEval-50}.
-\end{enumerate}
-Sandboxes run generated scripts inside \texttt{python3 -I} subprocesses ($2.5\text{s}$ timeout; $\xi_i = 1$ only on clean exit with stdout). We report both emulated multi-tenant latencies (adding independent $\mathrm{Pareto}(\alpha = 2.25)$ queue/container delays) and pure hardware-only MPS latencies ($T_{\mathrm{MPS}, i}$). On \QBench{} ($20$ routine, $30$ boundary traps inspired by \textsc{LiveCodeBench}~\cite{jain2025livecodebench}, \textsc{MATH}~\cite{hendrycks2021math}, and \textsc{MAST}~\cite{cemri2025mast}), we benchmark \texttt{Fast k-of-N} ($k=3$ agreeing votes~\cite{decandia2007dynamo}), \texttt{Fast 3-of-N Maj} (first $3$ plurality), tier-weighted \texttt{TW-Fast}, \texttt{Entropy-Cascade} (sequential fast-to-deep escalation), \texttt{CVaR Static Cutoff} sweep ($B \in [1.5, 30]\text{s}$~\cite{feng2026readiness}), unweighted \texttt{Sync N-of-N}~\cite{wang2023selfconsistency}, \texttt{Genealogy Sync (HPR)}~\cite{xie2026sparktofire,hpr2026collective}, and \QG{} across $10$ seeds (\texttt{2026..2035}, applying Gaussian option-logit jitter $\sigma_{\mathrm{logit}} = 0.25$ and resampled Pareto queue delays over cached MPS outputs) with $2{,}000$-bootstrap $95\%$ CIs.
+All evaluations ran on an Apple M5 Pro ($48~\mathrm{GB}$ unified memory, $\mathrm{FP16}$ Metal MPS, PyTorch~2.15.0, \texttt{transformers}~5.22.1) with \texttt{torch.mps.synchronize()} barriers. To stay within $48~\mathrm{GB}$ without swapping, multi-tier committees execute sequential single-tier passes separated by \texttt{torch.mps.empty\_cache()} ($\le 28.5~\mathrm{GB}$ peak for \texttt{14B-Coder}; $19.8~\mathrm{GB}$ for \texttt{SmolLM2+Granite}), paired with a live concurrent multi-KV-cache server (\texttt{Qwen2.5-7B}, $15.50~\mathrm{GB}$ peak) in \S\ref{sec:eval}. We test four suites: (1)~\emph{\textup{\textsc{QuorumBench}} 2-tier} ($30$ workflows, \texttt{Qwen2.5-3B+7B}~\cite{yang2024qwen25}: Stage~1 $N_1=7$ with $2$ triage-echo \texttt{3B} roots $r_0$, $1$ direct \texttt{3B} $r_1$, $1$ short-CoT \texttt{3B} $r_2$, $1$ \texttt{7B} CoT $r_3$, and $2$ \texttt{7B} sandbox verifiers $r_4, r_5$; Stage~2 $N_2=5$ with $3$ fast \texttt{3B} coordinators and $2$ \texttt{7B} auditors); (2)~\emph{\textup{\QBench{}} 3-tier} ($50$ workflows, replacing verifiers/auditors with \texttt{Qwen2.5-Coder-14B-Instruct}~\cite{hui2024qwen25coder}); (3)~\emph{External \textup{\textsc{CRUXEval-50}}}~\cite{gu2024cruxeval} ($50$ Python tasks pairing I/O prediction with assertion synthesis); and (4)~\emph{Cross-family non-Qwen pool} ($30$ workflows replacing Qwen with \texttt{SmolLM2-1.7B-Instruct}~\cite{allal2025smollm2} and \texttt{Granite-3.1-8B-Instruct}~\cite{granite2024team}). Sandboxes run \texttt{python3 -I} ($2.5\text{s}$ timeout; $\xi_i = 1$ on clean stdout). We report emulated latencies ($\mathrm{Pareto}(\alpha=2.25)$ queue delays) and pure MPS durations ($T_{\mathrm{MPS},i}$). On \QBench{} ($20$ routine, $30$ boundary traps~\cite{jain2025livecodebench,hendrycks2021math,cemri2025mast}), we compare \texttt{Fast k-of-N} ($k=3$~\cite{decandia2007dynamo}), \texttt{Fast 3-of-N Maj}, \texttt{TW-Fast}, \texttt{Entropy-Cascade}, $\CVaR$ sweep ($B \in [1.5, 30]\text{s}$~\cite{feng2026readiness}), \texttt{Sync N-of-N}~\cite{wang2023selfconsistency}, \texttt{Genealogy Sync (HPR)}~\cite{xie2026sparktofire,hpr2026collective}, and \QG{} across $10$ seeds (\texttt{2026..2035}, Gaussian logit jitter $\sigma_{\mathrm{logit}} = 0.25$ and resampled queue delays over cached MPS outputs) with $2{,}000$-bootstrap $95\%$ CIs.
 
 % ============================================================================
-\section{Experimental Results}\label{sec:eval}
+\section{Validation Results}\label{sec:eval}
 % ============================================================================
 
 \subsection{Verification of Phase-Transition, Cascade, and Queue Bounds}
@@ -392,11 +357,11 @@ Fig.~\ref{fig:phase_cascade} validates Theorems~\ref{thm:phase}--\ref{thm:cascad
 
 \begin{figure*}[!t]
   \centering
-  \begin{minipage}[t]{0.475\textwidth}
+  \begin{minipage}[t]{0.375\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig4_entropy_covariance_calibration.pdf}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.475\textwidth}
+  \begin{minipage}[t]{0.375\textwidth}
     \centering
     \includegraphics[width=\textwidth]{fig3_pareto_latency_accuracy.pdf}
   \end{minipage}
@@ -409,31 +374,10 @@ Live Qwen2.5 executions confirm positive latency--accuracy covariance on both po
 
 \begin{table*}[!t]
 \centering
-\caption{30-Workflow Two-Stage MPS Evaluation (\texttt{Qwen2.5-3B} + \texttt{Qwen2.5-7B}, Fast $k = 3$ of $N_1 = 7, N_2 = 5$, Seed~\texttt{2026}).}
-\label{tab:pilot30}
-\renewcommand{\arraystretch}{1.06}
-\resizebox{0.93\textwidth}{!}{%
-\begin{tabular}{@{}lccccccc@{}}
-\toprule
-\textbf{Consensus Policy} & \textbf{Stage-1 Acc} & \textbf{Stage-2 Acc} & \textbf{Joint 2-Stage Acc} & \textbf{Mean Latency} & \textbf{Routine Mean} & \textbf{P95 Latency} & \textbf{$\CVaR_{0.95}$ Latency} \\
-\midrule
-\texttt{Fast k-of-N ($k=3$)} & $43.3\%$ & $43.3\%$ & $26.7\%$ & $1.07\text{s}$ & $1.03\text{s}$ & $1.41\text{s}$ & $1.43\text{s}$ \\
-\texttt{CVaR Static Cutoff} ($2.8\text{s}$)~\cite{feng2026readiness} & $43.3\%$ & $40.0\%$ & $26.7\%$ & $5.60\text{s}$ & $5.60\text{s}$ & $5.60\text{s}$ & $5.60\text{s}$ \\
-\texttt{Sync N-of-N Barrier}~\cite{wang2023selfconsistency} & $60.0\%$ & $50.0\%$ & $36.7\%$ & $27.79\text{s}$ & $27.18\text{s}$ & $36.00\text{s}$ & $36.99\text{s}$ \\
-\texttt{Genealogy Sync (HPR)}~\cite{xie2026sparktofire,hpr2026collective} & $80.0\%$ & $70.0\%$ & $66.7\%$ & $28.30\text{s}$ & $27.18\text{s}$ & $36.73\text{s}$ & $36.99\text{s}$ \\
-\midrule
-\QG{} (Ours) & $80.0\%$ & $70.0\%$ & $66.7\%$ & $7.87\text{s}$ & $4.62\text{s}$ & $10.00\text{s}$ & $10.59\text{s}$ \\
-\bottomrule
-\end{tabular}%
-}
-\end{table*}
-
-\begin{table*}[!t]
-\centering
 \caption{\QBench{} Scale-Up Across 50 Two-Stage Workflows ($100$ Stages; Fast $k = 3$ of $N_1 = 7, N_2 = 5$; $2{,}000$-Bootstrap $95\%$ CIs and $10$-Seed Mean$\pm$Std).}
 \label{tab:scale50}
-\renewcommand{\arraystretch}{1.06}
-\resizebox{\textwidth}{!}{%
+\renewcommand{\arraystretch}{1.02}
+\resizebox{0.97\textwidth}{!}{%
 \begin{tabular}{@{}lccccccc@{}}
 \toprule
 \textbf{Consensus Policy} & \textbf{S1 / S2 Acc} & \textbf{Joint Acc [95\% CI]} & \textbf{10-Seed (Trap)} & \textbf{Mean / P95 [95\% CI]} & \textbf{HW-Only P95} & \textbf{$\CVaR_{0.95}$} \\
@@ -457,8 +401,8 @@ Live Qwen2.5 executions confirm positive latency--accuracy covariance on both po
 \centering
 \caption{External \textsc{CRUXEval-50}~\cite{gu2024cruxeval} and Cross-Family (\texttt{SmolLM2-1.7B}~\cite{allal2025smollm2} + \texttt{Granite-3.1-8B}~\cite{granite2024team}) Two-Stage Evaluation ($k=3$).}
 \label{tab:external}
-\renewcommand{\arraystretch}{1.05}
-\resizebox{\textwidth}{!}{%
+\renewcommand{\arraystretch}{1.02}
+\resizebox{0.97\textwidth}{!}{%
 \begin{tabular}{@{}llcccccc@{}}
 \toprule
 \textbf{Benchmark / Model Pool} & \textbf{Metric} & \textbf{\texttt{Fast k=3}} & \textbf{\texttt{TW-Fast}} & \textbf{\texttt{Cascade}} & \textbf{\texttt{Sync N-of-N}} & \textbf{\texttt{Gen.\ Sync}} & \textbf{\QG{} (Ours)} \\
@@ -480,9 +424,9 @@ $\Cov=+1.03\text{s}$ (MPS $+0.59\text{s}$) & Trap Acc & $0.0\%$ & $16.7\%$ & $44
 \end{table*}
 
 \subsection{Two-Stage Workflow Accuracy, Tail Latency, and Sensitivity}
-Tables~\ref{tab:pilot30} and~\ref{tab:scale50} summarize performance on \QBench{}. Under \texttt{Fast k-of-N} ($k = 3$) and \texttt{Fast 3-of-N Maj}, premature closure drops joint accuracy to $26.7\%$ (30-task) and $28.0\%$ on \QBench{} ($6.7\%$ on traps, $27.8\pm 0.6\%$ over $10$ seeds). Across a $7$-point $\CVaR$ cutoff sweep ($B \in [1.5, 30]\text{s}$), accuracy stalls near fast-quorum levels until $B > 10\text{s}$ ($28.0\%$ at $B=2.8\text{s}$, $36.0\%$ at $15\text{s}$, reaching $42.0\%$ at $B=30\text{s}$ and $45.00\text{s}$ $\mathrm{P95}$), matching unweighted \texttt{Sync N-of-N} ($42.0\%$, $46.83\text{s}$ $\mathrm{P95}$) where fast \texttt{3B} votes outnumber slower verifiers. Static \texttt{TW-Fast} improves traps to $23.3\%$ ($42.0\%$ joint) but lacks provenance and entropy gating, while \texttt{Entropy-Cascade} reaches $58.0\%$ joint accuracy at $45.06\text{s}$ $\mathrm{P95}$ ($28.81\text{s}$ HW-only).
+Table~\ref{tab:scale50} summarizes performance on \QBench{} (and matches trends on the 30-task \texttt{3B+7B} pilot, where \QG{} reaches $66.7\%$ joint accuracy vs.\ $26.7\%$ for \texttt{Fast k-of-N} and $\CVaR$, $36.7\%$ for \texttt{Sync N-of-N}, and $66.7\%$ for \texttt{Genealogy Sync}, cutting $\mathrm{P95}$ latency $3.67\times$ from $36.73\text{s}$ to $10.00\text{s}$, $7.87\text{s}$ mean). Under \texttt{Fast k-of-N} ($k = 3$) and \texttt{Fast 3-of-N Maj}, premature closure drops joint accuracy to $28.0\%$ on \QBench{} ($6.7\%$ on traps, $27.8\pm 0.6\%$ over $10$ seeds). Across a $7$-point $\CVaR$ cutoff sweep ($B \in [1.5, 30]\text{s}$), accuracy stalls near fast-quorum levels until $B > 10\text{s}$ ($28.0\%$ at $B=2.8\text{s}$, $36.0\%$ at $15\text{s}$, reaching $42.0\%$ at $B=30\text{s}$ and $45.00\text{s}$ $\mathrm{P95}$), matching unweighted \texttt{Sync N-of-N} ($42.0\%$, $46.83\text{s}$ $\mathrm{P95}$) where fast \texttt{3B} votes outnumber slower verifiers. Static \texttt{TW-Fast} improves traps to $23.3\%$ ($42.0\%$ joint) but lacks provenance and entropy gating, while \texttt{Entropy-Cascade} reaches $58.0\%$ joint accuracy at $45.06\text{s}$ $\mathrm{P95}$ ($28.81\text{s}$ HW-only).
 
-\QG{} matches \texttt{Genealogy Sync (HPR)} on \QBench{} at $84.0\%$ Stage-1, $86.0\%$ Stage-2, and $72.0\%$ joint accuracy ($63.3\%$ on traps, $72.0\pm 1.6\%$ across $10$ seeds, non-overlapping $95\%$ CI $[58\%, 84\%]$ vs.\ $[16\%, 42\%]$ for \texttt{Fast k-of-N}), while reducing $\mathrm{P95}$ latency by $3.10\times$--$3.14\times$ ($46.83\text{s}$--$47.39\text{s} \to 15.09\text{s}$; HW-only $30.19\text{s} \to 13.24\text{s}$, $2.28\times$; $3.57\times$ mean speedup) and $3.67\times$ on the 30-task pool ($36.73\text{s} \to 10.00\text{s}$). Table~\ref{tab:external} confirms generality outside \QBench{} and Qwen: on canonical \textsc{CRUXEval-50}, \QG{} improves joint accuracy by $+30.0$ points on \texttt{Qwen2.5-3B+7B} ($66.0\%$ vs.\ $36.0\%$) and $+40.0$ points on cross-family \texttt{SmolLM2-1.7B+Granite-3.1-8B} ($58.0\%$ vs.\ $18.0\%$) while cutting $\mathrm{P95}$ latency $3.20\times$--$3.54\times$ over synchronous barriers ($2.14\times$--$2.18\times$ HW-only). On $4$-axis sensitivity over \QBench{}, varying $\gamma_H \in [0.04, 0.40]$, $\tau_{\mathrm{eff}} \in [1.75, 2.50]$, and $m_{\mathrm{gap}} \in [0.40, 1.35]$ all retain $72.0\%$ joint accuracy ($14.90$--$15.09\text{s}$ $\mathrm{P95}$), while ablating grounding multipliers $\psi_i$ confirms their necessity: uniform $\psi_i \equiv 1.0$ drops joint accuracy to $60.0\%$ ($50.0\%$ traps) and sandbox-only $\psi = 1.25$ reaches $66.0\%$ vs.\ $72.0\%$ with tiered $\psi_i$.
+\QG{} matches \texttt{Genealogy Sync (HPR)} on \QBench{} at $84.0\%$ Stage-1, $86.0\%$ Stage-2, and $72.0\%$ joint accuracy ($63.3\%$ on traps, $72.0\pm 1.6\%$ across $10$ seeds, non-overlapping $95\%$ CI $[58\%, 84\%]$ vs.\ $[16\%, 42\%]$ for \texttt{Fast k-of-N}), while cutting $\mathrm{P95}$ latency by $3.10\times$--$3.14\times$ ($46.83\text{s}$--$47.39\text{s} \to 15.09\text{s}$; HW-only $30.19\text{s} \to 13.24\text{s}$, $2.28\times$; $3.57\times$ mean speedup). Table~\ref{tab:external} confirms generality outside \QBench{} and Qwen: on canonical \textsc{CRUXEval-50}, \QG{} improves joint accuracy by $+30.0$ points on \texttt{Qwen2.5-3B+7B} ($66.0\%$ vs.\ $36.0\%$) and $+40.0$ points on cross-family \texttt{SmolLM2-1.7B+Granite-3.1-8B} ($58.0\%$ vs.\ $18.0\%$) while cutting $\mathrm{P95}$ latency $3.20\times$--$3.54\times$ over synchronous barriers ($2.14\times$--$2.18\times$ HW-only). On $4$-axis sensitivity over \QBench{}, varying $\gamma_H \in [0.04, 0.40]$, $\tau_{\mathrm{eff}} \in [1.75, 2.50]$, and $m_{\mathrm{gap}} \in [0.40, 1.35]$ all retain $72.0\%$ joint accuracy ($14.90$--$15.09\text{s}$ $\mathrm{P95}$), while ablating grounding multipliers $\psi_i$ confirms their necessity: uniform $\psi_i \equiv 1.0$ drops joint accuracy to $60.0\%$ ($50.0\%$ traps) and sandbox-only $\psi = 1.25$ reaches $66.0\%$ vs.\ $72.0\%$ with tiered $\psi_i$.
 
 \begin{table}[!t]
 \centering
@@ -504,40 +448,14 @@ Tables~\ref{tab:pilot30} and~\ref{tab:scale50} summarize performance on \QBench{
 }
 \end{table}
 
-\begin{figure}[!t]
-  \centering
-  \includegraphics[width=0.96\columnwidth]{fig5_ablation_breakdown.pdf}
-  \caption{Stage-1 component ablation study. Combining pre-commitment entropy gating and provenance $\Neff$ raises Stage-1 accuracy to $80.0\%$ ($72.2\%$ on boundary traps), while priority dissent boosting reduces Stage-1 $\mathrm{P95}$ latency from $16.20\text{s}$ to $5.93\text{s}$ ($2.73\times$).}
-  \label{fig:ablation}
-\end{figure}
-
 \subsection{Component Ablations and Physical GPU Contention}
-Table~\ref{tab:ablation} and Fig.~\ref{fig:ablation} isolate each component on Stage~1. \texttt{Genealogy $\Neff$ Only} reaches $60.0\%$ accuracy ($38.9\%$ on traps) because lineage-disjoint \texttt{3B} agents still share zero-CoT blind spots, while \texttt{Entropy Gate Only} reaches $76.7\%$ because confident shared-root echoes occasionally pass without root deduplication. Combining both (\QG{} \texttt{w/o Boost}) reaches $80.0\%$ accuracy ($72.2\%$ on traps) at $16.20\text{s}$ $\mathrm{P95}$. Enabling token-bucket priority preemption (\QG{} \texttt{Full}) preserves $80.0\%$ accuracy while cutting Stage-1 $\mathrm{P95}$ to $5.93\text{s}$ ($2.73\times$) and $\CVaR_{0.95}$ to $6.35\text{s}$ ($2.87\times$).
-
-\begin{table}[!t]
-\centering
-\caption{Trace-Driven 8-Token Quantum Simulator (\texttt{Qwen2.5-7B} Profiled Quanta $= 554.38~\mathrm{ms}$, $450$ Poisson Requests/Load).}
-\label{tab:contention}
-\renewcommand{\arraystretch}{1.06}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}ccccc@{}}
-\toprule
-\textbf{GPU Load $\rho$} & \textbf{FCFS Wait} & \textbf{\QG{} Wait} & \textbf{Wait Comp.} & \textbf{Strag.\ $\CVaR_{95}$ (Unb.\ / \QG{})} \\
-\midrule
-$0.58$ & $10.35\text{s}$ & $2.04\text{s}$ & $5.09\times$ & $93.5\text{s}$ / $24.7\text{s}$ \\
-$0.72$ & $10.08\text{s}$ & $1.91\text{s}$ & $5.29\times$ & $115.6\text{s}$ / $20.8\text{s}$ \\
-$0.85$ & $13.52\text{s}$ & $3.11\text{s}$ & $4.35\times$ & $101.3\text{s}$ / $30.5\text{s}$ \\
-$0.93$ & $16.72\text{s}$ & $2.78\text{s}$ & $6.01\times$ & $116.0\text{s}$ / $23.2\text{s}$ \\
-\bottomrule
-\end{tabular}%
-}
-\end{table}
+Table~\ref{tab:ablation} isolates each component on Stage~1. \texttt{Genealogy $\Neff$ Only} reaches $60.0\%$ accuracy ($38.9\%$ on traps) because lineage-disjoint \texttt{3B} agents still share zero-CoT blind spots, while \texttt{Entropy Gate Only} reaches $76.7\%$ because confident shared-root echoes occasionally pass without root deduplication. Combining both (\QG{} \texttt{w/o Boost}) reaches $80.0\%$ accuracy ($72.2\%$ on traps) at $16.20\text{s}$ $\mathrm{P95}$. Enabling token-bucket priority preemption (\QG{} \texttt{Full}) preserves $80.0\%$ accuracy while cutting Stage-1 $\mathrm{P95}$ to $5.93\text{s}$ ($2.73\times$) and $\CVaR_{0.95}$ to $6.35\text{s}$ ($2.87\times$).
 
 \begin{table}[!t]
 \centering
 \caption{Live Concurrent Multi-KV-Cache MPS Server (\texttt{Qwen2.5-7B}, $64$ Poisson Requests/Policy, $\rho = 0.82$, $15.50~\mathrm{GB}$ Peak).}
 \label{tab:liveserver}
-\renewcommand{\arraystretch}{1.06}
+\renewcommand{\arraystretch}{1.04}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -554,31 +472,25 @@ $0.93$ & $16.72\text{s}$ & $2.78\text{s}$ & $6.01\times$ & $116.0\text{s}$ / $23
 
 \begin{figure}[!t]
   \centering
-  \includegraphics[width=0.98\columnwidth]{fig6_priority_contention.pdf}
+  \includegraphics[width=0.75\columnwidth]{fig6_priority_contention.pdf}
   \caption{Trace-driven 8-token quantum simulation across $\rho \in [0.58, 0.93]$. (a) \QG{} compresses dissenting straggler queue wait by $4.35\times$--$6.01\times$ over FCFS. (b) Unbounded urgent requests cause priority inflation ($\CVaR_{0.95} = 116.0\text{s}$ and $+98.6\%$ normal $\mathrm{P95}$ delay at $\rho = 0.93$), whereas \QG{} keeps straggler $\CVaR_{0.95} \le 30.5\text{s}$.}
   \label{fig:contention}
 \end{figure}
 
-To evaluate Theorem~\ref{thm:optimality}(2), we combine (1)~a $450$-request trace-driven Poisson quantum simulator parameterized by profiled 8-token KV-cached decode steps on \texttt{Qwen2.5-7B} ($\mathrm{FP16}$ mean $554.38~\mathrm{ms}$, $\mathrm{P95}$ $694.50~\mathrm{ms}$, prefill $102.17~\mathrm{ms}$; Table~\ref{tab:contention}, Fig.~\ref{fig:contention}), and (2)~a live concurrent multi-\texttt{DynamicCache} PyTorch MPS server running $64$-request Poisson streams per policy on \texttt{Qwen2.5-7B} at $\rho = 0.82$ (prefill $146.52~\mathrm{ms}$, 8-token quantum $647.66~\mathrm{ms}$, $15.50~\mathrm{GB}$ peak MPS allocation; Table~\ref{tab:liveserver}). In the simulator, allowing $65\%$ urgent requests (\texttt{Unbounded Urgent}) drives straggler $\CVaR_{0.95}$ to $116.0\text{s}$ ($+98.6\%$ normal $\mathrm{P95}$ inflation at $\rho = 0.93$), whereas \QG{} compresses straggler queue waits by $4.35\times$--$6.01\times$ ($16.72\text{s} \to 2.78\text{s}$). In the live concurrent MPS server, \QG{} compresses dissenting straggler wait by $11.74\times$ ($3.66\text{s} \to 0.31\text{s}$) and cuts straggler $\mathrm{P95}$ by $1.92\times$ ($26.57\text{s} \to 13.82\text{s}$, $\CVaR_{0.95} = 13.91\text{s}$ vs.\ $58.51\text{s}$ under \texttt{Unbounded Urgent}), while shifting foreground normal $\mathrm{P95}$ to $48.69\text{s}$ during the dense transient burst as predicted by the work-conserving preemption term in Eq.~\eqref{eq:thm3_wnorm}.
+To evaluate Theorem~\ref{thm:optimality}(2), we combine (1)~a $450$-request trace-driven Poisson quantum simulator parameterized by profiled 8-token KV-cached decode steps on \texttt{Qwen2.5-7B} ($\mathrm{FP16}$ mean $554.38~\mathrm{ms}$, $\mathrm{P95}$ $694.50~\mathrm{ms}$, prefill $102.17~\mathrm{ms}$; Fig.~\ref{fig:contention}), and (2)~a live concurrent multi-\texttt{DynamicCache} PyTorch MPS server running $64$-request Poisson streams per policy on \texttt{Qwen2.5-7B} at $\rho = 0.82$ (prefill $146.52~\mathrm{ms}$, 8-token quantum $647.66~\mathrm{ms}$, $15.50~\mathrm{GB}$ peak MPS allocation; Table~\ref{tab:liveserver}). In the simulator across $\rho \in \{0.58, 0.72, 0.85, 0.93\}$, \QG{} compresses straggler queue waits by $5.09\times$ ($10.35\text{s} \to 2.04\text{s}$), $5.29\times$ ($10.08\text{s} \to 1.91\text{s}$), $4.35\times$ ($13.52\text{s} \to 3.11\text{s}$), and $6.01\times$ ($16.72\text{s} \to 2.78\text{s}$), whereas allowing $65\%$ urgent requests (\texttt{Unbounded Urgent}) drives straggler $\CVaR_{0.95}$ to $93.5\text{s}$--$116.0\text{s}$ (vs.\ $20.8\text{s}$--$30.5\text{s}$ under \QG{}) and inflates normal $\mathrm{P95}$ by $+98.6\%$ at $\rho = 0.93$. In the live concurrent MPS server, \QG{} compresses dissenting straggler wait by $11.74\times$ ($3.66\text{s} \to 0.31\text{s}$) and cuts straggler $\mathrm{P95}$ by $1.92\times$ ($26.57\text{s} \to 13.82\text{s}$, $\CVaR_{0.95} = 13.91\text{s}$ vs.\ $58.51\text{s}$ under \texttt{Unbounded Urgent}), shifting normal $\mathrm{P95}$ to $48.69\text{s}$ during the dense burst as predicted by Eq.~\eqref{eq:thm3_wnorm}.
 
-\emph{Trace Examples:} Per-agent calibration logs~\cite{kadavath2022know,guo2017calibration,boland1989majority} illustrate both paths. On routine task \texttt{R01\_sha256\_bytes}, roots $r_0, r_1, r_2$ all choose \texttt{32 bytes} within $1.48\text{s}$ ($\Delta \in [5.8, 9.4]$, $\Htilde \le 0.009$, $\Neff = 2.39$), firing $\mathrm{CleanFast}$ and finishing both stages in $2.34\text{s}$ versus $23.61\text{s}$ under synchronous barriers ($10.1\times$ faster). On \texttt{T02\_float32\_precision\_stall} (\texttt{np.float32(16777216.0) + 1.0}), fast \texttt{3B} agents split across \texttt{16777316.0} and \texttt{Overflow} ($\Htilde = 0.31$); \texttt{Fast k-of-N} commits \texttt{Overflow} at $0.72\text{s}$, whereas \QG{} blocks Line~6, preempts a sandbox verifier to $\mathrm{Priority} = -10$ at $t = 0.92\text{s}$, verifies \texttt{16777216.0} ($\xi_i = 1, \Htilde = 0.000$), and finishes both stages in $8.8\text{s}$ versus $31.8\text{s}$ synchronous.
-
-% ============================================================================
-\section{Discussion and Limitations}\label{sec:discussion}
-% ============================================================================
-
-\emph{Free-Form Generation:} When agents produce open-ended patches or prose without fixed options, discrete logit probing can be replaced by semantic-cluster entropy~\cite{kuhn2023semantic,farquhar2024nature} over AST or unit-test equivalence classes among early arrivals, while provenance $\Neff$ and sandbox certificates ($\xi_i = 1$) apply unchanged.
-
-\emph{Lineage Metadata and Shared Blind Spots:} Propagating upstream chunk and summary IDs adds $<128~\mathrm{B}$ per RPC, and memoized root resolution in \texttt{ProvenanceDAG} takes $<15~\mu\mathrm{s}$ per arrival event. If every model tier and sandbox script lacks required domain knowledge (as on the remaining $16\%$ of \QBench{} Stage-1 tasks), holding the quorum gate cannot recover a correct answer, though $\Neff$ deduplication still prevents single-source echo cascades.
+\emph{Trace Examples:} Per-agent calibration logs~\cite{kadavath2022know,guo2017calibration,boland1989majority} illustrate both paths. On \texttt{R01\_sha256\_bytes}, roots $r_0, r_1, r_2$ choose \texttt{32 bytes} within $1.48\text{s}$ ($\Delta \in [5.8, 9.4]$, $\Htilde \le 0.009$, $\Neff = 2.39$), firing $\mathrm{CleanFast}$ and finishing in $2.34\text{s}$ vs.\ $23.61\text{s}$ synchronous ($10.1\times$). On \texttt{T02\_float32\_precision\_stall} (\texttt{np.float32(16777216.0) + 1.0}), \texttt{3B} agents split across \texttt{16777316.0} and \texttt{Overflow} ($\Htilde = 0.31$); \texttt{Fast k-of-N} commits \texttt{Overflow} at $0.72\text{s}$, whereas \QG{} boosts a sandbox verifier ($\mathrm{Priority} = -10$, $t = 0.92\text{s}$), verifies \texttt{16777216.0} ($\xi_i = 1, \Htilde = 0.000$), and finishes in $8.8\text{s}$ vs.\ $31.8\text{s}$ synchronous.
 
 % ============================================================================
-\section{Conclusion}\label{sec:conclusion}
+\section{Discussion, Limitations, and Conclusion}\label{sec:conclusion}
 % ============================================================================
 
-Asynchronous $k$-of-$N$ fast quorums fail in multi-agent LLM committees because completion latency and epistemic accuracy covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$). Static fast quorums undergo an order-statistic false-consensus phase transition below $\phicrit(\theta)$ for $|\mathcal{C}| \ge 2$ options that compounds across multi-stage workflow DAGs. \QG{} combines pre-commitment semantic entropy gating, provenance-DAG effective quorum sizing ($\Neff$), and token-bucket decode priority dissent preemption. Across Apple M5 Pro MPS evaluations spanning \QBench{} (\texttt{Qwen2.5-3B/7B/14B-Coder}), cross-family \texttt{SmolLM2-1.7B} + \texttt{Granite-3.1-8B}, and external \textsc{CRUXEval-50}, \QG{} matches synchronous genealogy-weighted accuracy ($+30.0$--$46.6$ percentage points over fast quorums) while cutting $\mathrm{P95}$ latency by $3.14\times$--$3.67\times$ ($2.14\times$--$2.28\times$ hardware-only) and compressing live concurrent MPS server straggler queue waits by $11.74\times$.
+\emph{Free-Form Generation and Governance Overhead:} For open-ended patches or policies without fixed choices, pre-commitment logit probing generalizes to semantic-cluster entropy~\cite{kuhn2023semantic,farquhar2024nature} over AST or test-suite equivalence classes, while $\Neff$ and sandbox certificates ($\xi_i = 1$) apply unchanged. Propagating upstream chunk IDs adds $<128~\mathrm{B}$ per RPC, and memoized \texttt{ProvenanceDAG} resolution takes $<15~\mu\mathrm{s}$ per arrival. When all tiers share a domain knowledge gap (the remaining $16\%$ of \QBench{} Stage-1 tasks), holding closure cannot recover a missing answer, though $\Neff$ still blocks single-source echo cascades.
+
+\emph{Conclusion:} Static $k$-of-$N$ fast quorums fail in heterogeneous multi-agent workflows because latency and epistemic accuracy covary positively ($\Cov(T_i, 1 - \varepsilon_i) > 0$), creating an order-statistic phase transition below $\phicrit(\theta)$ for $|\mathcal{C}| \ge 2$ options that compounds across multi-stage DAGs. \QG{} integrates pre-commitment semantic entropy verification, provenance-DAG quorum governance ($\Neff$), and token-bucket decode priority dissent boosting. Across Apple M5 Pro MPS evaluations on \QBench{} (\texttt{Qwen2.5-3B/7B/14B-Coder}), cross-family \texttt{SmolLM2-1.7B} + \texttt{Granite-3.1-8B}, and \textsc{CRUXEval-50}, \QG{} matches synchronous genealogy-weighted accuracy ($+30.0$--$46.6$ points over fast quorums) while cutting $\mathrm{P95}$ latency by $3.14\times$--$3.67\times$ ($2.14\times$--$2.28\times$ hardware-only) and compressing live concurrent MPS server straggler waits by $11.74\times$.
 
 \section*{Code and Data Availability}
-Source code, scheduler modules, and the \QBench{} v1.0 dataset~\cite{syed2026quorumbench} are available under Apache~2.0 at \url{https://github.com/batistado/quorumguard}, \url{https://huggingface.co/batistado/QuorumGuard}, \url{https://huggingface.co/datasets/batistado/QuorumBench}, and \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer}. The authors declare no competing financial interests.
+Code, scheduler modules, and \QBench{} v1.0~\cite{syed2026quorumbench} are under Apache~2.0 at \url{https://github.com/batistado/quorumguard} and \url{https://huggingface.co/datasets/batistado/QuorumBench} (with interactive explorer at \url{https://huggingface.co/spaces/batistado/QuorumGuard-Explorer} and model package at \url{https://huggingface.co/batistado/QuorumGuard}).
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

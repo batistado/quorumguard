@@ -2,12 +2,12 @@
 
 **Straggler-Induced Herding Bounds and Claim-Genealogy-Gated Hedged Quorums in Asynchronous Multi-Agent LLM Consensus**
 
-Research code, order-statistic proofs, Apple Silicon MPS telemetry (`Qwen2.5-3B/7B/Coder-14B`, `SmolLM2-1.7B`, `Granite-3.1-8B`), external `CRUXEval-50` benchmarks, trace-driven & live concurrent KV-cache GPU contention suites, and a 10-page manuscript (`paper/main.pdf`).
+Research code, order-statistic proofs, Apple Silicon MPS telemetry (`Qwen2.5-3B/7B/Coder-14B`, `SmolLM2-1.7B`, `Granite-3.1-8B`), external `CRUXEval-50` benchmarks, trace-driven & live concurrent KV-cache GPU contention suites, and an **8-page IEEE double-column conference manuscript** (`paper/main.pdf`, prepared for the **2027 IEEE International Systems Conference (SysCon)** Special Session on *Agentic AI for Autonomous Network Systems: Architecture, Verification, and Governance*).
 
 * **Dataset (`QuorumBench`):** https://huggingface.co/datasets/batistado/QuorumBench
 * **Interactive Explorer Space:** https://huggingface.co/spaces/batistado/QuorumGuard-Explorer
 * **Hugging Face Hub Package:** https://huggingface.co/batistado/QuorumGuard
-* **Compiled Paper PDF (10 pages):** [`paper/main.pdf`](paper/main.pdf)
+* **Compiled Paper PDF (8 pages, IEEE Conference):** [`paper/main.pdf`](paper/main.pdf)
 
 ## 1. Problem and Approach
 
@@ -80,12 +80,11 @@ quorumguard/
 ├── scripts/
 │   └── publish_huggingface.py                  # Publishes dataset, interactive Space & Hub package
 ├── paper/
-│   ├── main.tex / main.pdf                     # Compiled 10-page archival manuscript
-│   ├── highlights.tex / highlights.pdf         # Elsevier FGCS Research Highlights
+│   ├── main.tex / main.pdf                     # Compiled 8-page IEEE conference manuscript (SysCon 2027)
 │   ├── references.bib                          # 37 verified BibTeX references
 │   ├── generate_figures.py / figures/          # 7 vector PDF + PNG figures (fig0..fig6)
 │   ├── validate_latex.py                       # Static LaTeX, BibTeX & anti-slop prose validator
-│   └── quorumguard_fgcs_overleaf.zip           # Overleaf submission bundle
+│   └── quorumguard_syscon2027_overleaf.zip     # Overleaf submission bundle (IEEEtran conference)
 └── tests/
     └── test_quorumguard.py                     # Pytest suite (6 tests) for genealogy, entropy & scheduler
 ```

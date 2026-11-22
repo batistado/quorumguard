@@ -210,7 +210,7 @@ Benchmark tasks and Apple M5 Pro (`48 GB` unified memory, `MPS` FP16) telemetry 
 
 * **Interactive Explorer:** [`{username}/QuorumGuard-Explorer`](https://huggingface.co/spaces/{username}/QuorumGuard-Explorer)
 * **Scheduler & Controller Package:** [`{username}/QuorumGuard`](https://huggingface.co/{username}/QuorumGuard)
-* **Compiled Paper PDF (10 pages):** [`paper/main.pdf`](paper/main.pdf)
+* **Compiled Paper PDF (8 pages, IEEE SysCon 2027):** [`paper/main.pdf`](paper/main.pdf)
 * **GitHub Repository:** [`github.com/batistado/quorumguard`](https://github.com/batistado/quorumguard)
 
 ## Dataset Configurations
@@ -483,7 +483,7 @@ base_model:
 
 * **Benchmark Dataset:** [`{username}/QuorumBench`](https://huggingface.co/datasets/{username}/QuorumBench)
 * **Interactive Simulator Space:** [`{username}/QuorumGuard-Explorer`](https://huggingface.co/spaces/{username}/QuorumGuard-Explorer)
-* **Paper PDF (10 pages):** [`paper/main.pdf`](paper/main.pdf)
+* **Paper PDF (8 pages, IEEE SysCon 2027):** [`paper/main.pdf`](paper/main.pdf)
 * **Source Code & Paper:** [`github.com/batistado/quorumguard`](https://github.com/batistado/quorumguard)
 
 `QuorumGuard` is a model-agnostic consensus controller and quantum-preemptive priority scheduler for asynchronous multi-agent LLM committees. It requires zero weight modifications and operates on pre-commitment option logits, provenance DAGs, and priority-preemptive decode quanta (`Priority = -10` in both our live PyTorch MPS `DynamicCache` server and `vLLM`-compatible priority schedulers).
